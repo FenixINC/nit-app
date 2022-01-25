@@ -30,7 +30,10 @@ android {
 }
 
 dependencies {
-    implementation(project(":di"))
+    implementation(project(":domain"))
+
+    // Kotlin Coroutines
+    implementation (dependencyNotation = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")
 
     // Hilt
     implementation(dependencyNotation = "com.google.dagger:hilt-android:2.40.5")

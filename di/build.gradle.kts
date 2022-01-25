@@ -31,6 +31,8 @@ android {
 
 dependencies {
     implementation(project(":navigation"))
+    implementation(project(":domain"))
+    implementation(project(":data"))
 
     // AndroidX
     implementation(dependencyNotation = "androidx.core:core-ktx:1.7.0")
@@ -39,12 +41,12 @@ dependencies {
     // Material
     implementation(dependencyNotation = "com.google.android.material:material:1.5.0")
 
+    // Kotlin Coroutines
+    implementation(dependencyNotation = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")
+
     // Hilt
     implementation(dependencyNotation = "com.google.dagger:hilt-android:2.40.5")
     kapt(dependencyNotation = "com.google.dagger:hilt-android-compiler:2.40.5")
-
-    // Kotlin Coroutines
-    implementation (dependencyNotation = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
 
     // Test
     testImplementation(dependencyNotation = "junit:junit:4.13.2")

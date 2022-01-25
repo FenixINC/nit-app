@@ -14,7 +14,7 @@ import com.inquisitor.navigation.destination.SplashDestination
 import com.inquisitor.nit.navigation.addComposableDestinations
 import com.inquisitor.nit.ui.theme.NitappTheme
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -31,7 +31,7 @@ class MainActivity : ComponentActivity() {
                     val navController = rememberNavController()
 
                     LaunchedEffect(navController) {
-                        navigator.destinations.collect { navigationEvent ->
+                        navigator.destinations.collectLatest { navigationEvent ->
                             when (navigationEvent) {
                                 is NavigatorEvent.CloseApp -> this@MainActivity.finish()
                                 is NavigatorEvent.NavigateUp -> navController.navigateUp()
