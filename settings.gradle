@@ -1,0 +1,16 @@
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+rootProject.name = "nit-app"
+include ':app'
+include ':navigation'
+include ':feature-login'
+include ':feature-splash'
+include ':feature-home'
+include ':domain'
+include ':data'
+include ':di'
