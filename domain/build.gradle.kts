@@ -30,6 +30,9 @@ android {
 }
 
 dependencies {
+    implementation(project(":di"))
+    implementation(project(":data"))
+
     // Kotlin Coroutines
     implementation (dependencyNotation = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")
 

@@ -31,8 +31,9 @@ android {
 
 dependencies {
     implementation(project(":navigation"))
-    implementation(project(":domain"))
-    implementation(project(":data"))
+//    implementation(project(":domain"))
+//    implementation(project(":data"))
+//    implementation(project(":feature-login"))
 
     // AndroidX
     implementation(dependencyNotation = "androidx.core:core-ktx:1.7.0")

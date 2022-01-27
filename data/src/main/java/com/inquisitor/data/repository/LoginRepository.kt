@@ -1,4 +1,4 @@
-package com.inquisitor.domain.repository
+package com.inquisitor.data.repository
 
 import kotlinx.coroutines.flow.Flow
 

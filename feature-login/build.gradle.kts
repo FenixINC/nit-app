@@ -37,7 +37,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":di"))
+//    implementation(project(":di"))
+    implementation(project(":domain"))
     implementation(project(":navigation"))
 
     // Hilt

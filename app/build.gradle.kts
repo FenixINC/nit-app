@@ -53,6 +53,7 @@ dependencies {
     implementation(project(":navigation"))
     implementation(project(":feature-splash"))
     implementation(project(":feature-login"))
+    implementation(project(":feature-home"))
 
     // AndroidX
     implementation(dependencyNotation = "androidx.core:core-ktx:1.7.0")

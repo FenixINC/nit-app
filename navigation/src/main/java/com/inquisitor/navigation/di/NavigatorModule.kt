@@ -1,4 +1,4 @@
-package com.inquisitor.di.module
+package com.inquisitor.navigation.di
 
 import com.inquisitor.navigation.Navigator
 import com.inquisitor.navigation.NavigatorImpl
