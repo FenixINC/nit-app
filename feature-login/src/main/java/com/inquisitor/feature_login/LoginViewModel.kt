@@ -11,7 +11,7 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val navigator: Navigator,
-    private val zloginUseCase: LoginUseCase
+    private val loginUseCase: LoginUseCase
 ) : ViewModel(), Navigator by navigator {
     fun login() {
         viewModelScope.launch {
