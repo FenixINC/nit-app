@@ -1,5 +1,10 @@
 package com.inquisitor.domain.usecase
 
 interface LoginUseCase {
-    suspend fun login(onSuccess: (String) -> Unit, onError: (String) -> Unit)
+    suspend fun login(
+        username: String,
+        password: String,
+        onSuccess: (String) -> Unit = {},
+        onError: (String) -> Unit = {}
+    )
 }

@@ -3,7 +3,6 @@ package com.inquisitor.feature_splash.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.inquisitor.di.qualifier.IoDispatcher
-import com.inquisitor.navigation.NavigationConstants.ROUTE_HOME
 import com.inquisitor.navigation.NavigationConstants.ROUTE_LOGIN
 import com.inquisitor.navigation.Navigator
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,7 +19,7 @@ class SplashViewModel @Inject constructor(
     fun openLoginScreen() {
         viewModelScope.launch {
             delay(timeMillis = 2500L)
-            navigator.navigate(route = ROUTE_HOME)
+            navigator.navigate(route = ROUTE_LOGIN)
         }
     }
 }

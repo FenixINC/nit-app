@@ -12,11 +12,13 @@ class LoginUseCaseImpl @Inject constructor(
     private val loginRepository: LoginRepository
 ) : LoginUseCase {
     override suspend fun login(
+        username: String,
+        password: String,
         onSuccess: (String) -> Unit,
         onError: (String) -> Unit
     ) {
         loginRepository
-            .login()
+            .login(username = username, password = password)
             .catch { throwable ->
                 onError(throwable.localizedMessage ?: "")
             }

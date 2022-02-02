@@ -12,7 +12,7 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val navigator: Navigator,
     private val homeUseCase: HomeUseCase
-): ViewModel(),Navigator by navigator {
+) : ViewModel(), Navigator by navigator {
     fun loadFilmList() {
         viewModelScope.launch {
             homeUseCase.loadFilmList(

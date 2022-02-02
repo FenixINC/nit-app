@@ -10,5 +10,10 @@ import javax.inject.Singleton
 class LoginRepositoryImpl @Inject constructor(
     private val nitApi: NitApi
 ) : LoginRepository {
-    override suspend fun login(): Flow<String> = flow { nitApi.login() }
+    override suspend fun login(
+        username: String,
+        password: String
+    ): Flow<String> = flow {
+        emit(value = nitApi.login(username = username, password = password))
+    }
 }

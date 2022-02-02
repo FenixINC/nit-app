@@ -12,7 +12,7 @@ import javax.inject.Singleton
 class NitApi @Inject constructor(
     private val ktorClient: HttpClient // TODO: add qualifiers for different network client (ktor, retrofit, etc.)
 ) {
-    suspend fun login(): String {
+    suspend fun login(username: String, password: String): String {
         delay(timeMillis = 1500L)
         return "Hello"
     }

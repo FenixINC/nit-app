@@ -52,9 +52,9 @@ dependencies {
     // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
     implementation(dependencyNotation = "androidx.compose.foundation:foundation: 1.1.0-rc01")
     // Material Design, Icons
-    implementation(dependencyNotation = "androidx.compose.material:material:1.2.0-alpha01")
-//    implementation("androidx.compose.material:material-icons-core: 1.1.0-rc01")
-//    implementation("androidx.compose.material:material-icons-extended: 1.1.0-rc01")
+    implementation(dependencyNotation = "androidx.compose.material:material:1.2.0-alpha02")
+    implementation("androidx.compose.material:material-icons-core:1.2.0-alpha02")
+    implementation("androidx.compose.material:material-icons-extended:1.2.0-alpha02")
     // Integration with activities
     implementation(dependencyNotation = "androidx.activity:activity-compose:1.4.0")
     // Integration with ViewModels
@@ -74,6 +74,9 @@ dependencies {
     // Test
     testImplementation(dependencyNotation = "junit:junit:4.13.2")
     testImplementation(dependencyNotation = "org.mockito.kotlin:mockito-kotlin:3.2.0")
+    testImplementation(dependencyNotation = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0")
+    testImplementation(dependencyNotation = "androidx.arch.core:core-testing:2.1.0")
+    testImplementation (dependencyNotation = "app.cash.turbine:turbine:0.7.0")
     androidTestImplementation(dependencyNotation = "androidx.test.ext:junit:1.1.3")
     androidTestImplementation(dependencyNotation = "androidx.test.espresso:espresso-core:3.4.0")
     androidTestImplementation(dependencyNotation = "androidx.compose.ui:ui-test-junit4:1.1.0-rc01")

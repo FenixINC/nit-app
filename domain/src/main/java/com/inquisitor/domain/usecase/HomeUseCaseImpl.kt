@@ -12,7 +12,7 @@ class HomeUseCaseImpl @Inject constructor(
     private val homeRepository: HomeRepository
 ) : HomeUseCase {
     override suspend fun loadFilmList(
-        onSuccess: () -> Unit,
+        onSuccess: (String) -> Unit,
         onError: (String) -> Unit
     ) {
         homeRepository

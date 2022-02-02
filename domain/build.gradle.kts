@@ -34,7 +34,7 @@ dependencies {
     implementation(project(":data"))
 
     // Kotlin Coroutines
-    implementation (dependencyNotation = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")
+    implementation(dependencyNotation = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")
 
     // Hilt
     implementation(dependencyNotation = "com.google.dagger:hilt-android:2.40.5")
@@ -44,7 +44,8 @@ dependencies {
 //    implementation 'androidx.appcompat:appcompat:1.4.1'
 //    implementation 'com.google.android.material:material:1.5.0'
 
-//    testImplementation 'junit:junit:4.+'
-//    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    // Test
+    testImplementation(dependencyNotation = "junit:junit:4.13.2")
+    testImplementation(dependencyNotation = "org.mockito.kotlin:mockito-kotlin:3.2.0")
+    androidTestImplementation(dependencyNotation = "androidx.test.ext:junit:1.1.3")
 }
