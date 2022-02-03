@@ -49,11 +49,12 @@ android {
 }
 
 dependencies {
-    implementation(project(":di"))
-    implementation(project(":navigation"))
-    implementation(project(":feature-splash"))
-    implementation(project(":feature-login"))
-    implementation(project(":feature-home"))
+    implementation(project(":domain"))
+    implementation(project(":data"))
+//    implementation(project(":navigation"))
+//    implementation(project(":feature-splash"))
+//    implementation(project(":feature-login"))
+//    implementation(project(":feature-home"))
 
     // AndroidX
     implementation(dependencyNotation = "androidx.core:core-ktx:1.7.0")
@@ -65,6 +66,32 @@ dependencies {
     // Hilt
     implementation(dependencyNotation = "com.google.dagger:hilt-android:2.40.5")
     kapt(dependencyNotation = "com.google.dagger:hilt-android-compiler:2.40.5")
+
+    // Compose
+    implementation(dependencyNotation = "androidx.compose.compiler:compiler:1.1.0-rc01")
+    implementation(dependencyNotation = "androidx.compose.runtime:runtime:1.1.0-rc01")
+    implementation(dependencyNotation = "androidx.compose.ui:ui: 1.1.0-rc01")
+    // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
+    implementation(dependencyNotation = "androidx.compose.foundation:foundation: 1.1.0-rc01")
+    // Material Design, Icons
+    implementation(dependencyNotation = "androidx.compose.material:material:1.2.0-alpha02")
+    implementation("androidx.compose.material:material-icons-core:1.2.0-alpha02")
+    implementation("androidx.compose.material:material-icons-extended:1.2.0-alpha02")
+    // Integration with activities
+    implementation(dependencyNotation = "androidx.activity:activity-compose:1.4.0")
+    // Integration with ViewModels
+    implementation(dependencyNotation = "androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0")
+    // Integration with observables
+//    implementation("androidx.compose.runtime:runtime-livedata: 1.1.0-rc01")
+    // Compose Animations
+//    implementation("androidx.compose.animation:animation: 1.1.0-rc01")
+    // Compose Constraint
+    implementation(dependencyNotation = "androidx.constraintlayout:constraintlayout-compose:1.0.0")
+    // Navigation Hilt
+    implementation(dependencyNotation = "androidx.hilt:hilt-navigation-compose:1.0.0-rc01")
+
+    // Coil
+    implementation(dependencyNotation = "io.coil-kt:coil-compose:1.4.0")
 
     // Dagger
     implementation(dependencyNotation = "com.google.dagger:dagger:2.40.5")

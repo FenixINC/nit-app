@@ -1,7 +1,7 @@
 package com.inquisitor.domain.usecase
 
 import com.inquisitor.data.repository.LoginRepository
-import com.inquisitor.di.qualifier.IoDispatcher
+import com.inquisitor.domain.di.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOn

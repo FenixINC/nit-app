@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">nit-app</string>
+
+    <!--  Login Screen  -->
+    <string name="login">Login</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="enter_password">Enter password</string>
 </resources>

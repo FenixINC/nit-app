@@ -7,10 +7,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "nit-app"
 include ':app'
-include ':navigation'
-include ':feature-login'
-include ':feature-splash'
-include ':feature-home'
 include ':domain'
 include ':data'
-include ':di'

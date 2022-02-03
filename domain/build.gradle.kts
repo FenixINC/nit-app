@@ -30,7 +30,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":di"))
     implementation(project(":data"))
 
     // Kotlin Coroutines

@@ -14,7 +14,7 @@
         android:theme="@style/Theme.Nitapp">
 
         <activity
-            android:name=".main.MainActivity"
+            android:name="com.inquisitor.nit.ui.main.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.Nitapp.NoActionBar">
