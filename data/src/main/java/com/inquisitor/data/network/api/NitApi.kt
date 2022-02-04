@@ -1,7 +1,9 @@
 package com.inquisitor.data.network.api
 
+import com.inquisitor.data.constants.NetworkConstants.GET_BUNDLE_LIST
 import com.inquisitor.data.constants.NetworkConstants.GET_FILM_LIST
-import com.inquisitor.data.network.response.FilmResponse
+import com.inquisitor.data.network.response.anime.FilmResponse
+import com.inquisitor.data.network.response.open_sea_nft.MainBundleResponse
 import io.ktor.client.*
 import io.ktor.client.request.*
 import kotlinx.coroutines.delay
@@ -20,6 +22,12 @@ class NitApi @Inject constructor(
     suspend fun loadFilmList(): List<FilmResponse> {
         return ktorClient.get {
             url { path(GET_FILM_LIST) }
+        }
+    }
+
+    suspend fun loadNftAsset(): MainBundleResponse {
+        return ktorClient.get {
+            url { path(GET_BUNDLE_LIST) }
         }
     }
 

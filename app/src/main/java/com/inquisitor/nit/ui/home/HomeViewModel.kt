@@ -1,8 +1,8 @@
 package com.inquisitor.nit.ui.home
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.inquisitor.domain.usecase.HomeUseCase
+import com.inquisitor.nit.base.BaseViewModel
 import com.inquisitor.nit.navigation.Navigator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -12,8 +12,22 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val navigator: Navigator,
     private val homeUseCase: HomeUseCase
-) : ViewModel(), Navigator by navigator {
-    fun loadFilmList() {
+) : BaseViewModel<HomeEvent, HomeState, HomeEffect>(), Navigator by navigator {
+
+    override fun setInitialState() = HomeState.Idle
+
+    override fun handleEvents(event: HomeEvent) {
+        when (event) {
+            is HomeEvent.LoadNftList -> {
+                loadNftList()
+            }
+            is HomeEvent.Error -> {
+                navigator.onError(errorMessage = event.errorMessage)
+            }
+        }
+    }
+
+    private fun loadFilmList() {
         viewModelScope.launch {
             homeUseCase.loadFilmList(
                 onSuccess = {
@@ -21,6 +35,19 @@ class HomeViewModel @Inject constructor(
                 },
                 onError = {
                     val e = ""
+                }
+            )
+        }
+    }
+
+    private fun loadNftList() {
+        viewModelScope.launch {
+            homeUseCase.loadNftList(
+                onSuccess = {
+                    val s = it
+                },
+                onError = {
+                    val e = it
                 }
             )
         }

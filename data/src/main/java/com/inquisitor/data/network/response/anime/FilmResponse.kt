@@ -1,4 +1,4 @@
-package com.inquisitor.data.network.response
+package com.inquisitor.data.network.response.anime
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

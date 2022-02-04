@@ -10,7 +10,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.inquisitor.nit.navigation.NavigationConstants.ROUTE_HOME
 
 @Composable
 fun SplashScreen() {
@@ -18,7 +17,7 @@ fun SplashScreen() {
     BackHandler(onBack = { splashViewModel.onCloseApp() })
 
     LaunchedEffect(key1 = Unit) {
-        splashViewModel.setEvent(event = SplashEvent.OpenLoginScreen)
+        splashViewModel.setEvent(event = SplashEvent.OpenHomeScreen)
     }
 
     Column(
