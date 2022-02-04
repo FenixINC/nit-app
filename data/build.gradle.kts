@@ -44,6 +44,7 @@ dependencies {
     implementation(dependencyNotation = "io.ktor:ktor-client-android:1.6.7")
     implementation(dependencyNotation = "io.ktor:ktor-client-serialization:1.6.7")
     implementation(dependencyNotation = "io.ktor:ktor-client-logging-jvm:1.6.7")
+    implementation(dependencyNotation = "io.ktor:ktor-client-auth:1.6.7")
 
     // Kotlin Serialization
     implementation(dependencyNotation = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2")

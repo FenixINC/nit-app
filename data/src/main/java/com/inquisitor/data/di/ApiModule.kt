@@ -9,9 +9,9 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import io.ktor.client.*
-import io.ktor.client.call.*
 import io.ktor.client.engine.android.*
 import io.ktor.client.features.*
+import io.ktor.client.features.auth.*
 import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
 import io.ktor.client.features.logging.*
@@ -50,29 +50,50 @@ object ApiModule {
 
             HttpResponseValidator {
                 validateResponse { response ->
-                    when (val statusCode = response.status.value) {
+                    val statusCode = response.status.value
+                    when (statusCode) {
                         /**
                          * Handle different exceptions
                          * */
-                        in 400..499 -> throw HttpException(statusCode = statusCode)
+                        in 400..499 -> {
+                            throw HttpException()
+                        }
+                        in 500..599 -> {
+                            val s = ""
+                        }
+                        else -> {
+                            val s = ""
+                        }
                     }
                 }
 
                 handleResponseException { cause ->
-                    val responseException =
-                        cause as? ResponseException ?: return@handleResponseException
-                    val response = responseException.response
-                    val bytes = response.receive<ByteArray>()
-                    val string = bytes.decodeToString()
-                    val errorResponse = kotlinx.serialization.json.Json.decodeFromString(
-                        ErrorResponseSerializer,
-                        string
-                    )
-                    throw HttpException(
-                        statusCode = errorResponse.code?.toInt() ?: 400,
-                        statusMessage = errorResponse.message,
-                        url = errorResponse.name
-                    )
+                    when (cause) {
+                        is ClientRequestException -> {
+                            throw HttpException(
+                                statusCode = cause.response.status.value,
+                                errorMessage = cause.message,
+                                url = cause.response.toString()
+                            )
+                        }
+                        is ServerResponseException -> {
+
+                        }
+                    }
+//                    val responseException =
+//                        cause as? ResponseException ?: return@handleResponseException
+//                    val response = responseException.response
+//                    val bytes = response.receive<ByteArray>()
+//                    val string = bytes.decodeToString()
+//                    val errorResponse = kotlinx.serialization.json.Json.decodeFromString(
+//                        ErrorResponseSerializer,
+//                        string
+//                    )
+//                    throw HttpException(
+//                        statusCode = errorResponse.code?.toInt() ?: 400,
+//                        errorMessage = errorResponse.message,
+//                        url = errorResponse.name
+//                    )
                 }
             }
 
@@ -101,6 +122,8 @@ object ApiModule {
                 }
                 header(HttpHeaders.ContentType, ContentType.Application.Json)
             }
+
+            install(Auth)
         }
     }
 

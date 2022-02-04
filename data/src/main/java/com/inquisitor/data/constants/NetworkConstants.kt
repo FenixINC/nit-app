@@ -11,5 +11,5 @@ internal object NetworkConstants {
 
     const val GET_FILM_LIST = "films"
 
-    const val GET_BUNDLE_LIST = "bundles"
+    const val GET_BUNDLE_LIST = "bundles123"
 }

@@ -1,6 +1,7 @@
 package com.inquisitor.nit.ui.home
 
 import androidx.lifecycle.viewModelScope
+import com.inquisitor.data.network.error_handling.HttpException
 import com.inquisitor.domain.usecase.HomeUseCase
 import com.inquisitor.nit.base.BaseViewModel
 import com.inquisitor.nit.navigation.Navigator
@@ -46,8 +47,12 @@ class HomeViewModel @Inject constructor(
                 onSuccess = {
                     val s = it
                 },
-                onError = {
-                    val e = it
+                onError = { throwable ->
+                    when (throwable) {
+                        is HttpException -> {
+                            navigator.onError(errorMessage = throwable.errorMessage ?: "")
+                        }
+                    }
                 }
             )
         }
