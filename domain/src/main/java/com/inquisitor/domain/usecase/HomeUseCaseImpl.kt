@@ -1,10 +1,9 @@
 package com.inquisitor.domain.usecase
 
-import com.inquisitor.data.network.error_handling.NitException
 import com.inquisitor.data.repository.HomeRepository
-import com.inquisitor.domain.di.DefaultDispatcher
 import com.inquisitor.domain.di.IoDispatcher
 import com.inquisitor.domain.mapper.mapToModel
+import com.inquisitor.domain.model.AssetModel
 import com.inquisitor.domain.model.BundleModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.catch
@@ -14,7 +13,6 @@ import javax.inject.Inject
 
 class HomeUseCaseImpl @Inject constructor(
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
-    @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher,
     private val homeRepository: HomeRepository
 ) : HomeUseCase {
 
@@ -39,16 +37,33 @@ class HomeUseCaseImpl @Inject constructor(
     ) {
         homeRepository
             .loadNftAsset()
-            .flowOn(context = ioDispatcher)
             .map { mainBundleResponse ->
                 mainBundleResponse.mapToModel()
             }
-            .flowOn(context = defaultDispatcher)
+            .flowOn(context = ioDispatcher)
             .catch { throwable ->
                 onError(throwable)
             }
             .collect { result ->
                 onSuccess(result.bundleList ?: emptyList())
+            }
+    }
+
+    override suspend fun loadAssetList(
+        onSuccess: (List<AssetModel>) -> Unit,
+        onError: (Throwable) -> Unit
+    ) {
+        homeRepository
+            .loadAssetList()
+            .map { mainAssetResponse ->
+                mainAssetResponse.assetList.mapToModel()
+            }
+            .flowOn(context = ioDispatcher)
+            .catch { throwable ->
+                onError(throwable)
+            }
+            .collect { result ->
+                onSuccess(result)
             }
     }
 }

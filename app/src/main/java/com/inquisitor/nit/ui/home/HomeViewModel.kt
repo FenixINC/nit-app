@@ -15,12 +15,18 @@ class HomeViewModel @Inject constructor(
     private val homeUseCase: HomeUseCase
 ) : BaseViewModel<HomeEvent, HomeState, HomeEffect>(), Navigator by navigator {
 
-    override fun setInitialState() = HomeState.Idle
+    override fun setInitialState() = HomeState()
 
     override fun handleEvents(event: HomeEvent) {
         when (event) {
             is HomeEvent.LoadNftList -> {
                 loadNftList()
+            }
+            is HomeEvent.LoadAssetList -> {
+                loadAssetList()
+            }
+            is HomeEvent.LoadFilmList -> {
+                loadFilmList()
             }
             is HomeEvent.Error -> {
                 navigator.onError(errorMessage = event.errorMessage)
@@ -46,6 +52,28 @@ class HomeViewModel @Inject constructor(
             homeUseCase.loadNftList(
                 onSuccess = {
                     val s = it
+                },
+                onError = { throwable ->
+                    when (throwable) {
+                        is HttpException -> {
+                            navigator.onError(errorMessage = throwable.errorMessage ?: "")
+                        }
+                    }
+                }
+            )
+        }
+    }
+
+    private fun loadAssetList() {
+        viewModelScope.launch {
+            homeUseCase.loadAssetList(
+                onSuccess = { assetList ->
+                    setState {
+                        copy(
+                            isLoading = false,
+                            assetList = assetList
+                        )
+                    }
                 },
                 onError = { throwable ->
                     when (throwable) {

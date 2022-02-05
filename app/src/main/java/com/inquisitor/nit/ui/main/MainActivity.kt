@@ -12,7 +12,7 @@ import com.inquisitor.nit.navigation.Navigator
 import com.inquisitor.nit.navigation.NavigatorEvent
 import com.inquisitor.nit.navigation.destination.SplashDestination
 import com.inquisitor.nit.navigation.destination.addComposableDestinations
-import com.inquisitor.nit.ui.theme.NitappTheme
+import com.inquisitor.nit.ui.resources.theme.NitappTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject

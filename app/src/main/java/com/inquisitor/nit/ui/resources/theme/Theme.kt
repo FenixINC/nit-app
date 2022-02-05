@@ -1,4 +1,4 @@
-package com.inquisitor.nit.ui.theme
+package com.inquisitor.nit.ui.resources.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme

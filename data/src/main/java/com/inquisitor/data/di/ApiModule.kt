@@ -1,6 +1,6 @@
 package com.inquisitor.data.di
 
-import com.inquisitor.data.constants.NetworkConstants.BASE_URL_OPEN_SEA_NFT
+import com.inquisitor.data.constants.NetworkConstants.BASE_URL_PEXELS
 import com.inquisitor.data.constants.NetworkConstants.TIME_OUT
 import com.inquisitor.data.network.error_handling.ErrorResponse
 import com.inquisitor.data.network.error_handling.HttpException
@@ -117,7 +117,7 @@ object ApiModule {
 
             defaultRequest {
                 url {
-                    host = BASE_URL_OPEN_SEA_NFT
+                    host = BASE_URL_PEXELS
                     protocol = URLProtocol.HTTPS
                 }
                 header(HttpHeaders.ContentType, ContentType.Application.Json)
