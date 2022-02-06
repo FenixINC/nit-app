@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class VideoPicture(
+data class VideoPictureResponse(
     @SerialName(value = "id") val id: Long? = 0L,
     @SerialName(value = "nr") val nr: Int? = 0,
     @SerialName(value = "picture") val picture: String? = ""

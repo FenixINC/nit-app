@@ -2,6 +2,7 @@ package com.inquisitor.data.network.api
 
 import com.inquisitor.data.constants.NetworkConstants.GET_ASSET_LIST
 import com.inquisitor.data.constants.NetworkConstants.GET_BUNDLE_LIST
+import com.inquisitor.data.constants.NetworkConstants.GET_COLLECTION_LIST
 import com.inquisitor.data.constants.NetworkConstants.GET_FILM_LIST
 import com.inquisitor.data.constants.NetworkConstants.GET_SEARCH_PHOTO
 import com.inquisitor.data.constants.NetworkConstants.GET_SEARCH_VIDEO
@@ -11,6 +12,7 @@ import com.inquisitor.data.constants.NetworkConstants.V1
 import com.inquisitor.data.network.response.anime.FilmResponse
 import com.inquisitor.data.network.response.open_sea_nft.MainAssetResponse
 import com.inquisitor.data.network.response.open_sea_nft.MainBundleResponse
+import com.inquisitor.data.network.response.pexels.MainCollectionResponse
 import com.inquisitor.data.network.response.pexels.MainPhotoResponse
 import com.inquisitor.data.network.response.pexels.MainVideoResponse
 import io.ktor.client.*
@@ -48,12 +50,24 @@ class NitApi @Inject constructor(
     }
 
     /**
+     *
+     *
+     *
      * PEXELS API
+     *
+     *
+     *
      **/
 
-    suspend fun loadPhotoList(searchKey: String = "Popular"): MainPhotoResponse {
+    suspend fun loadCollectionList(): MainCollectionResponse {
         return ktorClient.get {
-            url { path("$V1/$GET_SEARCH_PHOTO") }
+            url { path(GET_COLLECTION_LIST) }
+        }
+    }
+
+    suspend fun loadPhotoListBySearchKey(searchKey: String = "Popular"): MainPhotoResponse {
+        return ktorClient.get {
+            url { path(GET_SEARCH_PHOTO) }
             parameter(key = QUERY_PARAM, value = searchKey)
         }
     }

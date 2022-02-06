@@ -36,7 +36,9 @@ class MainActivity : ComponentActivity() {
                                 is NavigatorEvent.CloseApp -> this@MainActivity.finish()
                                 is NavigatorEvent.NavigateUp -> navController.navigateUp()
                                 is NavigatorEvent.Error -> {
-                                    // TODO: show error
+                                    when (navigationEvent.throwable) {
+                                        // TODO: show error
+                                    }
                                 }
                                 is NavigatorEvent.Directions -> navController.navigate(
                                     navigationEvent.destination,

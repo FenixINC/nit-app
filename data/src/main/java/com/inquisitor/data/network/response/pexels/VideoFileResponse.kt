@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class VideoFile(
+data class VideoFileResponse(
     @SerialName(value = "id") val id: Long? = 0L,
     @SerialName(value = "quality") val quality: String? = "",
     @SerialName(value = "file_type") val fileType: String? = "",

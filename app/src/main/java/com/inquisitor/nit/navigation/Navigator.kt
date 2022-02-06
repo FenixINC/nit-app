@@ -8,7 +8,7 @@ interface Navigator {
 
     fun onCloseApp(): Boolean
 
-    fun onError(errorMessage: String): Boolean
+    fun onError(throwable: Throwable): Boolean
 
     fun navigateUp(): Boolean
 

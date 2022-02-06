@@ -1,7 +1,6 @@
 package com.inquisitor.nit.ui.home
 
 import androidx.lifecycle.viewModelScope
-import com.inquisitor.data.network.error_handling.HttpException
 import com.inquisitor.domain.usecase.HomeUseCase
 import com.inquisitor.nit.base.BaseViewModel
 import com.inquisitor.nit.navigation.Navigator
@@ -19,68 +18,77 @@ class HomeViewModel @Inject constructor(
 
     override fun handleEvents(event: HomeEvent) {
         when (event) {
-            is HomeEvent.LoadNftList -> {
-                loadNftList()
-            }
-            is HomeEvent.LoadAssetList -> {
-                loadAssetList()
-            }
-            is HomeEvent.LoadFilmList -> {
-                loadFilmList()
+//            is HomeEvent.LoadNftList -> {
+//                loadNftList()
+//            }
+//            is HomeEvent.LoadAssetList -> {
+//                loadAssetList()
+//            }
+//            is HomeEvent.LoadFilmList -> {
+//                loadFilmList()
+//            }
+            is HomeEvent.LoadPhotoList -> {
+                loadPhotoList()
             }
             is HomeEvent.Error -> {
-                navigator.onError(errorMessage = event.errorMessage)
+
             }
         }
     }
 
-    private fun loadFilmList() {
-        viewModelScope.launch {
-            homeUseCase.loadFilmList(
-                onSuccess = {
-                    val s = ""
-                },
-                onError = {
-                    val e = ""
-                }
-            )
-        }
-    }
+//    private fun loadFilmList() {
+//        viewModelScope.launch {
+//            homeUseCase.loadFilmList(
+//                onSuccess = {
+//                    val s = ""
+//                },
+//                onError = {
+//                    val e = ""
+//                }
+//            )
+//        }
+//    }
+//
+//    private fun loadNftList() {
+//        viewModelScope.launch {
+//            homeUseCase.loadNftList(
+//                onSuccess = {
+//                    val s = it
+//                },
+//                onError = { throwable ->
+//
+//                }
+//            )
+//        }
+//    }
+//
+//    private fun loadAssetList() {
+//        viewModelScope.launch {
+//            homeUseCase.loadAssetList(
+//                onSuccess = { assetList ->
+//                    setState {
+//                        copy(
+//                            isLoading = false,
+//                            assetList = assetList
+//                        )
+//                    }
+//                },
+//                onError = { throwable ->
+//                    navigator.onError(throwable = throwable)
+//                }
+//            )
+//        }
+//    }
 
-    private fun loadNftList() {
+    private fun loadPhotoList() {
         viewModelScope.launch {
-            homeUseCase.loadNftList(
+            homeUseCase.loadPhotoListBySearchKey(
+                searchKey = "Popular",
                 onSuccess = {
                     val s = it
                 },
                 onError = { throwable ->
-                    when (throwable) {
-                        is HttpException -> {
-                            navigator.onError(errorMessage = throwable.errorMessage ?: "")
-                        }
-                    }
-                }
-            )
-        }
-    }
 
-    private fun loadAssetList() {
-        viewModelScope.launch {
-            homeUseCase.loadAssetList(
-                onSuccess = { assetList ->
-                    setState {
-                        copy(
-                            isLoading = false,
-                            assetList = assetList
-                        )
-                    }
-                },
-                onError = { throwable ->
-                    when (throwable) {
-                        is HttpException -> {
-                            navigator.onError(errorMessage = throwable.errorMessage ?: "")
-                        }
-                    }
                 }
             )
         }

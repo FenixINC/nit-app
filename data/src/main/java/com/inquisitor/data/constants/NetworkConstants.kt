@@ -37,6 +37,7 @@ internal object NetworkConstants {
      *
      **/
 
+    const val AUTHORIZATION = "Authorization"
     const val API_KEY = "563492ad6f91700001000001598075e713ef4db392b0a110654c1a3c"
     const val BASE_URL_PEXELS = "api.pexels.com"
 
@@ -44,7 +45,8 @@ internal object NetworkConstants {
      * GET
      **/
 
-    const val GET_SEARCH_PHOTO = "search"
+    const val GET_COLLECTION_LIST = "$V1/collections/featured"
+    const val GET_SEARCH_PHOTO = "$V1/search"
     const val GET_SEARCH_VIDEO = "videos/search"
 
     /**

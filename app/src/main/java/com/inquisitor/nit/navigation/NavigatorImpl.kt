@@ -15,8 +15,8 @@ class NavigatorImpl @Inject constructor() : Navigator {
     override fun onCloseApp(): Boolean =
         navigationEvents.trySend(NavigatorEvent.CloseApp).isSuccess
 
-    override fun onError(errorMessage: String): Boolean =
-        navigationEvents.trySend(NavigatorEvent.Error(errorMessage = errorMessage)).isSuccess
+    override fun onError(throwable: Throwable): Boolean =
+        navigationEvents.trySend(NavigatorEvent.Error(throwable = throwable)).isSuccess
 
     override fun navigateUp(): Boolean =
         navigationEvents.trySend(NavigatorEvent.NavigateUp).isSuccess

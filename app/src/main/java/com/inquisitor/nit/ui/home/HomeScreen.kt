@@ -42,7 +42,7 @@ fun HomeScreen() {
         }
     }
 
-    homeViewModel.setEvent(event = HomeEvent.LoadFilmList)
+    homeViewModel.setEvent(event = HomeEvent.LoadPhotoList)
 }
 
 @Composable
@@ -57,13 +57,7 @@ private fun HomeScreenContent(
                 is HomeEffect.Loading -> {
 
                 }
-                is HomeEffect.Error -> {
-                    homeViewModel.setEvent(
-                        event = HomeEvent.Error(errorMessage = effect.errorMessage)
-                    )
-                }
             }
-
         }
     }
 }

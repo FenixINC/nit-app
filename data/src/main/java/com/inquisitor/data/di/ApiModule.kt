@@ -1,5 +1,7 @@
 package com.inquisitor.data.di
 
+import com.inquisitor.data.constants.NetworkConstants.API_KEY
+import com.inquisitor.data.constants.NetworkConstants.AUTHORIZATION
 import com.inquisitor.data.constants.NetworkConstants.BASE_URL_PEXELS
 import com.inquisitor.data.constants.NetworkConstants.TIME_OUT
 import com.inquisitor.data.network.error_handling.ErrorResponse
@@ -120,7 +122,8 @@ object ApiModule {
                     host = BASE_URL_PEXELS
                     protocol = URLProtocol.HTTPS
                 }
-                header(HttpHeaders.ContentType, ContentType.Application.Json)
+                header(key = HttpHeaders.ContentType, value = ContentType.Application.Json)
+                header(key = AUTHORIZATION, value = API_KEY)
             }
 
             install(Auth)
