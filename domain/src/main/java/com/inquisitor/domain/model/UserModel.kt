@@ -1,5 +1,7 @@
 package com.inquisitor.domain.model
 
 data class UserModel(
-    val username: String? = ""
+    val id: Long? = 0L,
+    val name: String? = "",
+    val url: String? = ""
 )

@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class CollectionResponse(
-    @SerialName(value = "id") val id: Long? = 0L,
+    @SerialName(value = "id") val id: String? = "",
     @SerialName(value = "title") val title: String? = "",
     @SerialName(value = "description") val description: String? = "",
     @SerialName(value = "private") val private: Boolean? = false,

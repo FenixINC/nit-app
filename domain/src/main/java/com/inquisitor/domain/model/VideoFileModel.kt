@@ -1,4 +1,4 @@
-package com.inquisitor.domain.model.pexels
+package com.inquisitor.domain.model
 
 data class VideoFileModel(
     val id: Long? = 0L,

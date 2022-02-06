@@ -1,7 +1,7 @@
-package com.inquisitor.domain.mapper.pexels
+package com.inquisitor.domain.mapper
 
 import com.inquisitor.data.network.response.pexels.MediaResponse
-import com.inquisitor.domain.model.pexels.MediaModel
+import com.inquisitor.domain.model.MediaModel
 
 fun MediaResponse.mapToModel() = MediaModel(
     id = this.id,

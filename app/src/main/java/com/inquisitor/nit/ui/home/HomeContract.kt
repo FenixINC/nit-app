@@ -3,18 +3,16 @@ package com.inquisitor.nit.ui.home
 import com.example.mobicatestapp.viewmodel.base.ViewEffect
 import com.example.mobicatestapp.viewmodel.base.ViewEvent
 import com.example.mobicatestapp.viewmodel.base.ViewState
-import com.inquisitor.domain.model.AssetModel
-import com.inquisitor.domain.model.BundleModel
+import com.inquisitor.domain.model.CollectionModel
 
 data class HomeState(
-    val isLoading: Boolean? = false,
-    val nftList: List<BundleModel>? = emptyList(),
-    val assetList: List<AssetModel>? = emptyList()
+    val collectionList: List<CollectionModel>? = null
 ) : ViewState
 
 sealed class HomeEvent : ViewEvent {
+    object LoadCollectionList : HomeEvent()
     object LoadPhotoList : HomeEvent()
-    data class Error(val errorMessage: String) : HomeEvent()
+    data class OpenCollectionDetails(val collectionId: String) : HomeEvent()
 }
 
 sealed class HomeEffect : ViewEffect {

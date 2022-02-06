@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.inquisitor.domain.usecase.HomeUseCase
 import com.inquisitor.nit.base.BaseViewModel
 import com.inquisitor.nit.navigation.Navigator
+import com.inquisitor.nit.navigation.destination.CollectionDetailsDestination
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -18,67 +19,32 @@ class HomeViewModel @Inject constructor(
 
     override fun handleEvents(event: HomeEvent) {
         when (event) {
-//            is HomeEvent.LoadNftList -> {
-//                loadNftList()
-//            }
-//            is HomeEvent.LoadAssetList -> {
-//                loadAssetList()
-//            }
-//            is HomeEvent.LoadFilmList -> {
-//                loadFilmList()
-//            }
+            is HomeEvent.LoadCollectionList -> {
+                loadCollectionList()
+            }
             is HomeEvent.LoadPhotoList -> {
                 loadPhotoList()
             }
-            is HomeEvent.Error -> {
-
+            is HomeEvent.OpenCollectionDetails -> {
+                openCollectionDetails(collectionId = event.collectionId)
             }
         }
     }
 
-//    private fun loadFilmList() {
-//        viewModelScope.launch {
-//            homeUseCase.loadFilmList(
-//                onSuccess = {
-//                    val s = ""
-//                },
-//                onError = {
-//                    val e = ""
-//                }
-//            )
-//        }
-//    }
-//
-//    private fun loadNftList() {
-//        viewModelScope.launch {
-//            homeUseCase.loadNftList(
-//                onSuccess = {
-//                    val s = it
-//                },
-//                onError = { throwable ->
-//
-//                }
-//            )
-//        }
-//    }
-//
-//    private fun loadAssetList() {
-//        viewModelScope.launch {
-//            homeUseCase.loadAssetList(
-//                onSuccess = { assetList ->
-//                    setState {
-//                        copy(
-//                            isLoading = false,
-//                            assetList = assetList
-//                        )
-//                    }
-//                },
-//                onError = { throwable ->
-//                    navigator.onError(throwable = throwable)
-//                }
-//            )
-//        }
-//    }
+    private fun loadCollectionList() {
+        viewModelScope.launch {
+            homeUseCase.loadCollectionList(
+                onSuccess = { collectionList ->
+                    setState {
+                        copy(collectionList = collectionList)
+                    }
+                },
+                onError = { throwable ->
+                    navigator.onError(throwable = throwable)
+                }
+            )
+        }
+    }
 
     private fun loadPhotoList() {
         viewModelScope.launch {
@@ -90,6 +56,16 @@ class HomeViewModel @Inject constructor(
                 onError = { throwable ->
 
                 }
+            )
+        }
+    }
+
+    private fun openCollectionDetails(collectionId: String) {
+        viewModelScope.launch {
+            navigator.navigate(
+                route = CollectionDetailsDestination.createCollectionDetailsDestination(
+                    collectionId = collectionId
+                )
             )
         }
     }

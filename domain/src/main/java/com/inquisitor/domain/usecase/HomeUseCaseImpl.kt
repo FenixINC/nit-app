@@ -3,11 +3,8 @@ package com.inquisitor.domain.usecase
 import com.inquisitor.data.repository.HomeRepository
 import com.inquisitor.domain.di.IoDispatcher
 import com.inquisitor.domain.mapper.mapToModel
-import com.inquisitor.domain.mapper.pexels.mapToModel
-import com.inquisitor.domain.model.AssetModel
-import com.inquisitor.domain.model.BundleModel
-import com.inquisitor.domain.model.pexels.CollectionModel
-import com.inquisitor.domain.model.pexels.PhotoModel
+import com.inquisitor.domain.model.CollectionModel
+import com.inquisitor.domain.model.PhotoModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOn
@@ -31,42 +28,6 @@ class HomeUseCaseImpl @Inject constructor(
             }
             .collect {
                 val s = it
-            }
-    }
-
-    override suspend fun loadNftList(
-        onSuccess: (List<BundleModel>) -> Unit,
-        onError: (Throwable) -> Unit
-    ) {
-        homeRepository
-            .loadNftAsset()
-            .map { mainBundleResponse ->
-                mainBundleResponse.mapToModel()
-            }
-            .flowOn(context = ioDispatcher)
-            .catch { throwable ->
-                onError(throwable)
-            }
-            .collect { result ->
-                onSuccess(result.bundleList ?: emptyList())
-            }
-    }
-
-    override suspend fun loadAssetList(
-        onSuccess: (List<AssetModel>) -> Unit,
-        onError: (Throwable) -> Unit
-    ) {
-        homeRepository
-            .loadAssetList()
-            .map { mainAssetResponse ->
-                mainAssetResponse.assetList.mapToModel()
-            }
-            .flowOn(context = ioDispatcher)
-            .catch { throwable ->
-                onError(throwable)
-            }
-            .collect { result ->
-                onSuccess(result)
             }
     }
 

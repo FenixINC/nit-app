@@ -1,4 +1,4 @@
-package com.inquisitor.domain.model.pexels
+package com.inquisitor.domain.model
 
 data class PhotoModel(
     val id: Long? = 0L,

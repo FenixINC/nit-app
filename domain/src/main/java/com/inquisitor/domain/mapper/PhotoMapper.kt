@@ -1,8 +1,7 @@
-package com.inquisitor.domain.mapper.pexels
+package com.inquisitor.domain.mapper
 
 import com.inquisitor.data.network.response.pexels.PhotoResponse
-import com.inquisitor.domain.model.pexels.PhotoModel
-import com.inquisitor.domain.model.pexels.SrcModel
+import com.inquisitor.domain.model.PhotoModel
 
 fun List<PhotoResponse>.mapToModel() = map { photoResponse ->
     PhotoModel(

@@ -6,3 +6,4 @@ val toolbarHeight = 55.dp
 val spaceDefault = 4.dp
 val space8dp = 8.dp
 val space16dp = 16.dp
+val space55dp = 55.dp

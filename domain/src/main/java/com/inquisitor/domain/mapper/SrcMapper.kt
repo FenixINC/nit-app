@@ -1,7 +1,7 @@
-package com.inquisitor.domain.mapper.pexels
+package com.inquisitor.domain.mapper
 
 import com.inquisitor.data.network.response.pexels.SrcResponse
-import com.inquisitor.domain.model.pexels.SrcModel
+import com.inquisitor.domain.model.SrcModel
 
 fun SrcResponse.mapToModel() = SrcModel(
     original = this.original,

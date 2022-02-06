@@ -1,16 +1,18 @@
 package com.inquisitor.nit.ui.home
 
 import androidx.activity.compose.BackHandler
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.inquisitor.nit.ui.base.Toolbar
+import com.inquisitor.nit.ui.resources.space16dp
+import com.inquisitor.nit.ui.resources.space8dp
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 
@@ -42,6 +44,7 @@ fun HomeScreen() {
         }
     }
 
+    homeViewModel.setEvent(event = HomeEvent.LoadCollectionList)
     homeViewModel.setEvent(event = HomeEvent.LoadPhotoList)
 }
 
@@ -57,6 +60,31 @@ private fun HomeScreenContent(
                 is HomeEffect.Loading -> {
 
                 }
+            }
+        }
+    }
+
+    if (!homeState.collectionList.isNullOrEmpty()) {
+        LazyRow(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight(),
+            contentPadding = PaddingValues(horizontal = space16dp, vertical = space8dp),
+            horizontalArrangement = Arrangement.spacedBy(space = space8dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            items(
+                items = homeState.collectionList,
+                key = { collectionModel -> collectionModel.id }
+            ) { collectionModel ->
+                CollectionRow(
+                    collectionModel = collectionModel,
+                    onCollectionClick = { collection ->
+                        homeViewModel.setEvent(
+                            event = HomeEvent.OpenCollectionDetails(collectionId = collection.id)
+                        )
+                    }
+                )
             }
         }
     }

@@ -1,9 +1,9 @@
-package com.inquisitor.domain.mapper.pexels
+package com.inquisitor.domain.mapper
 
 import com.inquisitor.data.network.response.pexels.VideoFileResponse
 import com.inquisitor.data.network.response.pexels.VideoPictureResponse
-import com.inquisitor.domain.model.pexels.VideoFileModel
-import com.inquisitor.domain.model.pexels.VideoPictureModel
+import com.inquisitor.domain.model.VideoFileModel
+import com.inquisitor.domain.model.VideoPictureModel
 
 @JvmName(name = "videoFileResponseListToModel")
 fun List<VideoFileResponse>.mapToModel() = map { videoFileResponse ->

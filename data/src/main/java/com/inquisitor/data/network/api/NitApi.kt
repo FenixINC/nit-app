@@ -1,17 +1,11 @@
 package com.inquisitor.data.network.api
 
-import com.inquisitor.data.constants.NetworkConstants.GET_ASSET_LIST
-import com.inquisitor.data.constants.NetworkConstants.GET_BUNDLE_LIST
 import com.inquisitor.data.constants.NetworkConstants.GET_COLLECTION_LIST
 import com.inquisitor.data.constants.NetworkConstants.GET_FILM_LIST
 import com.inquisitor.data.constants.NetworkConstants.GET_SEARCH_PHOTO
 import com.inquisitor.data.constants.NetworkConstants.GET_SEARCH_VIDEO
-import com.inquisitor.data.constants.NetworkConstants.QUERY_OFFSET
 import com.inquisitor.data.constants.NetworkConstants.QUERY_PARAM
-import com.inquisitor.data.constants.NetworkConstants.V1
 import com.inquisitor.data.network.response.anime.FilmResponse
-import com.inquisitor.data.network.response.open_sea_nft.MainAssetResponse
-import com.inquisitor.data.network.response.open_sea_nft.MainBundleResponse
 import com.inquisitor.data.network.response.pexels.MainCollectionResponse
 import com.inquisitor.data.network.response.pexels.MainPhotoResponse
 import com.inquisitor.data.network.response.pexels.MainVideoResponse
@@ -33,19 +27,6 @@ class NitApi @Inject constructor(
     suspend fun loadFilmList(): List<FilmResponse> {
         return ktorClient.get {
             url { path(GET_FILM_LIST) }
-        }
-    }
-
-    suspend fun loadNftAsset(): MainBundleResponse {
-        return ktorClient.get {
-            url { path(GET_BUNDLE_LIST) }
-        }
-    }
-
-    suspend fun loadAssetList(pageIndex: Int = 0): MainAssetResponse {
-        return ktorClient.get {
-            url { path(GET_ASSET_LIST) }
-            parameter(key = QUERY_OFFSET, value = pageIndex)
         }
     }
 
