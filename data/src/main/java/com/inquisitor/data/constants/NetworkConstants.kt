@@ -46,6 +46,7 @@ internal object NetworkConstants {
      **/
 
     const val GET_COLLECTION_LIST = "$V1/collections/featured"
+    const val GET_COLLECTION_DETAILS = "$V1/collections"
     const val GET_SEARCH_PHOTO = "$V1/search"
     const val GET_SEARCH_VIDEO = "videos/search"
 

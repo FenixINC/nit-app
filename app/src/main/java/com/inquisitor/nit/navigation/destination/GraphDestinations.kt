@@ -12,7 +12,7 @@ import com.inquisitor.nit.ui.home.HomeScreen
 import com.inquisitor.nit.ui.login.LoginScreen
 import com.inquisitor.nit.ui.splash.SplashScreen
 
-private val composableDestinations: Map<NavigationDestination, @Composable (NavBackStackEntry) -> Unit> =
+private fun getComposableDestinations(): Map<NavigationDestination, @Composable (NavBackStackEntry) -> Unit> =
     mapOf(
         SplashDestination to { SplashScreen() },
         LoginDestination to { LoginScreen() },
@@ -28,7 +28,7 @@ private val composableDestinations: Map<NavigationDestination, @Composable (NavB
     )
 
 fun NavGraphBuilder.addComposableDestinations() {
-    composableDestinations.forEach { entry ->
+    getComposableDestinations().forEach { entry ->
         val destination = entry.key
 
         composable(

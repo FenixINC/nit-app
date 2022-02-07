@@ -1,9 +1,6 @@
 package com.inquisitor.data.di
 
-import com.inquisitor.data.repository.HomeRepository
-import com.inquisitor.data.repository.HomeRepositoryImpl
-import com.inquisitor.data.repository.LoginRepository
-import com.inquisitor.data.repository.LoginRepositoryImpl
+import com.inquisitor.data.repository.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -18,4 +15,13 @@ internal abstract class RepositoryModule {
 
     @Binds
     abstract fun provideHomeRepository(homeRepository: HomeRepositoryImpl): HomeRepository
+
+    @Binds
+    abstract fun provideCollectionRepository(collectionRepository: CollectionRepositoryImpl): CollectionRepository
+
+    @Binds
+    abstract fun providePhotoRepository(photoRepository: PhotoRepositoryImpl): PhotoRepository
+
+    @Binds
+    abstract fun provideVideoRepository(videoRepository: VideoRepositoryImpl): VideoRepository
 }

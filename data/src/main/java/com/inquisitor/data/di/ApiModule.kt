@@ -4,8 +4,8 @@ import com.inquisitor.data.constants.NetworkConstants.API_KEY
 import com.inquisitor.data.constants.NetworkConstants.AUTHORIZATION
 import com.inquisitor.data.constants.NetworkConstants.BASE_URL_PEXELS
 import com.inquisitor.data.constants.NetworkConstants.TIME_OUT
+import com.inquisitor.data.network.error_handling.ClientHttpException
 import com.inquisitor.data.network.error_handling.ErrorResponse
-import com.inquisitor.data.network.error_handling.HttpException
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -51,30 +51,33 @@ object ApiModule {
             }
 
             HttpResponseValidator {
-                validateResponse { response ->
-                    val statusCode = response.status.value
-                    when (statusCode) {
-                        /**
-                         * Handle different exceptions
-                         * */
-                        in 400..499 -> {
-                            throw HttpException()
-                        }
-                        in 500..599 -> {
-                            val s = ""
-                        }
-                        else -> {
-                            val s = ""
-                        }
-                    }
-                }
+//                validateResponse { response ->
+//                    val statusCode = response.status.value
+//                    when (statusCode) {
+//                        /**
+//                         * Handle different exceptions
+//                         * */
+//                        in 400..499 -> {
+//                            throw HttpException()
+//                        }
+//                        in 500..599 -> {
+//                            val s = ""
+//                        }
+//                        else -> {
+//                            val s = ""
+//                        }
+//                    }
+//                }
 
                 handleResponseException { cause ->
                     when (cause) {
                         is ClientRequestException -> {
-                            throw HttpException(
-                                statusCode = cause.response.status.value,
-                                errorMessage = cause.message,
+                            val statusCode = cause.response.status.value
+                            val errorMessage = cause.response.status.description
+
+                            throw ClientHttpException(
+                                statusCode = statusCode,
+                                errorMessage = errorMessage,
                                 url = cause.response.toString()
                             )
                         }

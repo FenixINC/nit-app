@@ -1,11 +1,13 @@
 package com.inquisitor.data.network.api
 
+import com.inquisitor.data.constants.NetworkConstants.GET_COLLECTION_DETAILS
 import com.inquisitor.data.constants.NetworkConstants.GET_COLLECTION_LIST
 import com.inquisitor.data.constants.NetworkConstants.GET_FILM_LIST
 import com.inquisitor.data.constants.NetworkConstants.GET_SEARCH_PHOTO
 import com.inquisitor.data.constants.NetworkConstants.GET_SEARCH_VIDEO
 import com.inquisitor.data.constants.NetworkConstants.QUERY_PARAM
 import com.inquisitor.data.network.response.anime.FilmResponse
+import com.inquisitor.data.network.response.pexels.CollectionDetailsResponse
 import com.inquisitor.data.network.response.pexels.MainCollectionResponse
 import com.inquisitor.data.network.response.pexels.MainPhotoResponse
 import com.inquisitor.data.network.response.pexels.MainVideoResponse
@@ -43,6 +45,12 @@ class NitApi @Inject constructor(
     suspend fun loadCollectionList(): MainCollectionResponse {
         return ktorClient.get {
             url { path(GET_COLLECTION_LIST) }
+        }
+    }
+
+    suspend fun loadCollectionDetails(collectionId: String): CollectionDetailsResponse {
+        return ktorClient.get {
+            url { path("$GET_COLLECTION_DETAILS/$collectionId") }
         }
     }
 

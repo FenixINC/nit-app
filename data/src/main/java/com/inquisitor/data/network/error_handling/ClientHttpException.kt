@@ -1,6 +1,6 @@
 package com.inquisitor.data.network.error_handling
 
-class HttpException(
+class ClientHttpException(
     override val errorMessage: String? = null,
     override val statusCode: Int? = 0,
     val url: String? = null,

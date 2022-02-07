@@ -19,7 +19,7 @@ import kotlinx.coroutines.flow.collectLatest
 @Composable
 fun HomeScreen() {
     val homeViewModel = hiltViewModel<HomeViewModel>()
-    BackHandler(onBack = { homeViewModel.onCloseApp() })
+    BackHandler(onBack = { homeViewModel.setEvent(event = HomeEvent.CloseApp) })
 
     val homeState = homeViewModel.viewState.collectAsState()
     val homeEffect = homeViewModel.effect
@@ -31,6 +31,12 @@ fun HomeScreen() {
         ) {
             Toolbar()
         }
+
+        Spacer(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(height = space16dp)
+        )
 
         Box(
             modifier = Modifier
@@ -44,8 +50,7 @@ fun HomeScreen() {
         }
     }
 
-    homeViewModel.setEvent(event = HomeEvent.LoadCollectionList)
-    homeViewModel.setEvent(event = HomeEvent.LoadPhotoList)
+    homeViewModel.setEvent(event = HomeEvent.LoadMedia)
 }
 
 @Composable
@@ -69,7 +74,7 @@ private fun HomeScreenContent(
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight(),
-            contentPadding = PaddingValues(horizontal = space16dp, vertical = space8dp),
+            contentPadding = PaddingValues(horizontal = space16dp),
             horizontalArrangement = Arrangement.spacedBy(space = space8dp),
             verticalAlignment = Alignment.CenterVertically
         ) {

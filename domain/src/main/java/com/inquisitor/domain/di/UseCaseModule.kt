@@ -1,9 +1,6 @@
 package com.inquisitor.domain.di
 
-import com.inquisitor.domain.usecase.HomeUseCase
-import com.inquisitor.domain.usecase.HomeUseCaseImpl
-import com.inquisitor.domain.usecase.LoginUseCase
-import com.inquisitor.domain.usecase.LoginUseCaseImpl
+import com.inquisitor.domain.usecase.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -18,4 +15,13 @@ internal abstract class UseCaseModule {
 
     @Binds
     abstract fun provideHomeUseCase(homeUseCase: HomeUseCaseImpl): HomeUseCase
+
+    @Binds
+    abstract fun provideCollectionUseCase(collectionUseCase: CollectionUseCaseImpl): CollectionUseCase
+
+    @Binds
+    abstract fun providePhotoUseCase(photoUseCase: PhotoUseCaseImpl): PhotoUseCase
+
+    @Binds
+    abstract fun provideVideoUseCase(videoUseCase: VideoUseCaseImpl): VideoUseCase
 }
