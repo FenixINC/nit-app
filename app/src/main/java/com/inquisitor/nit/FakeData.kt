@@ -17,12 +17,6 @@ data class FakeItemModel(
 )
 
 object FakeData {
-//    fun getFakeHotCollectionList() = mutableListOf(
-//        FakeHotCollectionModel(
-//
-//        )
-//    )
-
     fun getFakeItemList() = mutableListOf(
         FakeItemModel(
             id = 1,
