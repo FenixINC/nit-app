@@ -1,9 +1,10 @@
 package com.inquisitor.nit.navigation.destination
 
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
-import androidx.navigation.compose.composable
+import com.google.accompanist.navigation.animation.composable
 import com.inquisitor.nit.constants.StringConstants.EMPTY_TEXT
 import com.inquisitor.nit.navigation.NavigationConstants.ARG_COLLECTION_ID
 import com.inquisitor.nit.navigation.NavigationDestination
@@ -27,6 +28,7 @@ private fun getComposableDestinations(): Map<NavigationDestination, @Composable 
         }
     )
 
+@OptIn(ExperimentalAnimationApi::class)
 fun NavGraphBuilder.addComposableDestinations() {
     getComposableDestinations().forEach { entry ->
         val destination = entry.key

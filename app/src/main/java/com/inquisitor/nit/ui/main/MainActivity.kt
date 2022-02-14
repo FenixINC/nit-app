@@ -3,7 +3,10 @@ package com.inquisitor.nit.ui.main
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
@@ -12,8 +15,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.rememberNavController
+import com.google.accompanist.navigation.animation.AnimatedNavHost
+import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.inquisitor.nit.navigation.Navigator
 import com.inquisitor.nit.navigation.NavigatorEvent
 import com.inquisitor.nit.navigation.destination.SplashDestination
@@ -32,6 +35,7 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var navigator: Navigator
 
+    @OptIn(ExperimentalAnimationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -39,7 +43,7 @@ class MainActivity : ComponentActivity() {
 
             NitappTheme {
                 Surface(color = MaterialTheme.colors.background) {
-                    val navController = rememberNavController()
+                    val navController = rememberAnimatedNavController()
 
                     Column(modifier = Modifier.fillMaxSize()) {
                         AnimatedVisibility(visible = isShowToolbarState.value) {
@@ -78,11 +82,35 @@ class MainActivity : ComponentActivity() {
                                 }
                             }
                         }
-                        NavHost(
+                        AnimatedNavHost(
                             navController = navController,
                             startDestination = SplashDestination.route(),
                             builder = {
                                 addComposableDestinations()
+                            },
+                            enterTransition = {
+                                slideIntoContainer(
+                                    AnimatedContentScope.SlideDirection.Left,
+                                    animationSpec = tween(200)
+                                )
+                            },
+                            exitTransition = {
+                                slideOutOfContainer(
+                                    AnimatedContentScope.SlideDirection.Left,
+                                    animationSpec = tween(200)
+                                )
+                            },
+                            popEnterTransition = {
+                                slideIntoContainer(
+                                    AnimatedContentScope.SlideDirection.Right,
+                                    animationSpec = tween(200)
+                                )
+                            },
+                            popExitTransition = {
+                                slideOutOfContainer(
+                                    AnimatedContentScope.SlideDirection.Right,
+                                    animationSpec = tween(200)
+                                )
                             }
                         )
                     }
