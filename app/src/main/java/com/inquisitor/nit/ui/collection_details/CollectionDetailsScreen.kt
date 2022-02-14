@@ -8,16 +8,19 @@ import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.inquisitor.nit.ui.base.Toolbar
+import com.inquisitor.nit.ui.base.top_bar.NitTopBar
 import com.inquisitor.nit.ui.resources.space16dp
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
-fun CollectionDetailsScreen(collectionId: String) {
-    val collectionDetailsViewModel = hiltViewModel<CollectionDetailsViewModel>()
+fun CollectionDetailsScreen(
+    collectionId: String,
+    collectionDetailsViewModel: CollectionDetailsViewModel = hiltViewModel()
+) {
     BackHandler(onBack = { collectionDetailsViewModel.setEvent(event = CollectionDetailsEvent.NavigateUp) })
 
     val collectionDetailsState = collectionDetailsViewModel.viewState.collectAsState()
@@ -28,7 +31,7 @@ fun CollectionDetailsScreen(collectionId: String) {
             modifier = Modifier
                 .wrapContentSize()
         ) {
-            Toolbar(showArrowBack = true)
+            NitTopBar(topBarState = mutableStateOf(value = true))
         }
 
         Spacer(

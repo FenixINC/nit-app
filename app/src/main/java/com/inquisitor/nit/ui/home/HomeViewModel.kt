@@ -5,7 +5,6 @@ import com.inquisitor.domain.model.CollectionModel
 import com.inquisitor.domain.model.PhotoModel
 import com.inquisitor.domain.model.VideoModel
 import com.inquisitor.domain.usecase.CollectionUseCase
-import com.inquisitor.domain.usecase.HomeUseCase
 import com.inquisitor.domain.usecase.PhotoUseCase
 import com.inquisitor.domain.usecase.VideoUseCase
 import com.inquisitor.nit.base.BaseViewModel
@@ -28,6 +27,10 @@ class HomeViewModel @Inject constructor(
     private val photoUseCase: PhotoUseCase,
     private val videoUseCase: VideoUseCase
 ) : BaseViewModel<HomeEvent, HomeState, HomeEffect>(), Navigator by navigator {
+
+    init {
+        navigator.topBar(isShowTopBar = true)
+    }
 
     override fun setInitialState() = HomeState()
 
@@ -174,14 +177,14 @@ class HomeViewModel @Inject constructor(
 
             awaitAll(
                 collectionsAsync,
-                recommendedPhotoAsync,
-                recommendedVideoAsync,
-                animalsPhotoAsync,
-                animalsVideoAsync,
-                naturePhotoAsync,
-                natureVideoAsync,
-                trendsPhotoAsync,
-                trendsVideoAsync
+//                recommendedPhotoAsync,
+//                recommendedVideoAsync,
+//                animalsPhotoAsync,
+//                animalsVideoAsync,
+//                naturePhotoAsync,
+//                natureVideoAsync,
+//                trendsPhotoAsync,
+//                trendsVideoAsync
             )
 
             setState {

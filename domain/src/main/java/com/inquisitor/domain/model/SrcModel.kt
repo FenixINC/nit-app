@@ -1,7 +1,7 @@
 package com.inquisitor.domain.model
 
 data class SrcModel(
-    val original: String? = ",",
+    val original: String? = "",
     val large2x: String? = "",
     val large: String? = "",
     val medium: String? = "",

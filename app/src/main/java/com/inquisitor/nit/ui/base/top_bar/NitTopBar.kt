@@ -1,4 +1,4 @@
-package com.inquisitor.nit.ui.base
+package com.inquisitor.nit.ui.base.top_bar
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
@@ -7,6 +7,8 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -16,14 +18,14 @@ import com.inquisitor.nit.ui.resources.space16dp
 import com.inquisitor.nit.ui.resources.toolbarHeight
 
 @Composable
-fun Toolbar(showArrowBack: Boolean = false) {
-    val toolbarViewModel = hiltViewModel<ToolbarViewModel>()
-
+fun NitTopBar(
+    nitTopBarViewModel: NitTopBarViewModel = hiltViewModel(),
+    topBarState: MutableState<Boolean> = mutableStateOf(value = false)
+) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .height(height = toolbarHeight)
-
     ) {
         Row(
             modifier = Modifier
@@ -32,9 +34,9 @@ fun Toolbar(showArrowBack: Boolean = false) {
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            AnimatedVisibility(visible = showArrowBack) {
+            AnimatedVisibility(visible = topBarState.value) {
                 IconButton(
-                    onClick = { toolbarViewModel.setEvent(event = ToolbarEvent.NavigateUp) }
+                    onClick = { nitTopBarViewModel.setEvent(event = ToolbarEvent.NavigateUp) }
                 ) {
                     Image(
                         imageVector = Icons.Filled.ArrowBack,
@@ -53,7 +55,7 @@ fun Toolbar(showArrowBack: Boolean = false) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 IconButton(
-                    onClick = { toolbarViewModel.setEvent(event = ToolbarEvent.OpenProfile) }
+                    onClick = { nitTopBarViewModel.setEvent(event = ToolbarEvent.OpenProfile) }
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.ic_profile),
@@ -62,7 +64,7 @@ fun Toolbar(showArrowBack: Boolean = false) {
                 }
 
                 IconButton(
-                    onClick = { toolbarViewModel.setEvent(event = ToolbarEvent.OpenMenu) }
+                    onClick = { nitTopBarViewModel.setEvent(event = ToolbarEvent.OpenMenu) }
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.ic_menu),
@@ -71,7 +73,6 @@ fun Toolbar(showArrowBack: Boolean = false) {
                 }
 
             }
-
         }
     }
 }

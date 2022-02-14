@@ -39,10 +39,6 @@ dependencies {
     implementation(dependencyNotation = "com.google.dagger:hilt-android:2.40.5")
     kapt(dependencyNotation = "com.google.dagger:hilt-android-compiler:2.40.5")
 
-//    implementation 'androidx.core:core-ktx:1.7.0'
-//    implementation 'androidx.appcompat:appcompat:1.4.1'
-//    implementation 'com.google.android.material:material:1.5.0'
-
     // Test
     testImplementation(dependencyNotation = "junit:junit:4.13.2")
     testImplementation(dependencyNotation = "org.mockito.kotlin:mockito-kotlin:3.2.0")

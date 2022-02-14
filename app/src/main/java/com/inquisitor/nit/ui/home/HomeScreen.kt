@@ -1,43 +1,39 @@
 package com.inquisitor.nit.ui.home
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.animation.Animatable
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
+import androidx.compose.material.Button
+import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.inquisitor.nit.ui.base.Toolbar
+import com.inquisitor.domain.model.CollectionModel
+import com.inquisitor.nit.R
 import com.inquisitor.nit.ui.resources.space16dp
 import com.inquisitor.nit.ui.resources.space8dp
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
-fun HomeScreen() {
-    val homeViewModel = hiltViewModel<HomeViewModel>()
+fun HomeScreen(homeViewModel: HomeViewModel = hiltViewModel()) {
     BackHandler(onBack = { homeViewModel.setEvent(event = HomeEvent.CloseApp) })
 
     val homeState = homeViewModel.viewState.collectAsState()
     val homeEffect = homeViewModel.effect
 
     Column(modifier = Modifier.fillMaxSize()) {
-        Box(
-            modifier = Modifier
-                .wrapContentSize()
-        ) {
-            Toolbar()
-        }
-
-        Spacer(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(height = space16dp)
-        )
-
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -50,7 +46,8 @@ fun HomeScreen() {
         }
     }
 
-    homeViewModel.setEvent(event = HomeEvent.LoadMedia)
+    // TODO: temporary
+//    homeViewModel.setEvent(event = HomeEvent.LoadMedia)
 }
 
 @Composable
@@ -59,6 +56,30 @@ private fun HomeScreenContent(
     homeEffect: Flow<HomeEffect>,
     homeViewModel: HomeViewModel
 ) {
+    var isAnimated by remember { mutableStateOf(value = false) }
+    val colorState = remember { Animatable(Color.DarkGray) }
+
+    var isRotated by rememberSaveable { mutableStateOf(false) }
+    val rotationAngle by animateFloatAsState(
+        targetValue = if (isRotated) {
+            360F
+        } else {
+            0f
+        },
+        animationSpec = tween(durationMillis = 2500)
+    )
+
+    LaunchedEffect(isAnimated) {
+        colorState.animateTo(
+            targetValue = if (isAnimated) {
+                Color.Green
+            } else {
+                Color.Red
+            },
+            animationSpec = tween(durationMillis = 500)
+        )
+    }
+
     LaunchedEffect(key1 = Unit) {
         homeEffect.collectLatest { effect ->
             when (effect) {
@@ -69,7 +90,10 @@ private fun HomeScreenContent(
         }
     }
 
-    if (!homeState.collectionList.isNullOrEmpty()) {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         LazyRow(
             modifier = Modifier
                 .fillMaxWidth()
@@ -79,7 +103,12 @@ private fun HomeScreenContent(
             verticalAlignment = Alignment.CenterVertically
         ) {
             items(
-                items = homeState.collectionList,
+                items = homeState.collectionList ?: listOf(
+                    CollectionModel(
+                        id = "1",
+                        title = "ERROR"
+                    )
+                ),
                 key = { collectionModel -> collectionModel.id }
             ) { collectionModel ->
                 CollectionRow(
@@ -92,5 +121,45 @@ private fun HomeScreenContent(
                 )
             }
         }
+
+        // TODO: Testing animations
+        Button(
+            onClick = {
+                isAnimated = !isAnimated
+                isRotated = !isRotated
+            },
+            modifier = Modifier
+                .size(width = 100.dp, height = 50.dp)
+                .background(color = Color.Blue)
+        ) {
+
+        }
+
+        Spacer(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(height = 50.dp)
+        )
+
+        Box(
+            modifier = Modifier
+                .rotate(rotationAngle)
+                .size(width = 100.dp, height = 100.dp)
+                .background(colorState.value)
+        )
+
+        Spacer(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(height = 50.dp)
+        )
+
+        Image(
+            painter = painterResource(id = R.drawable.item1),
+            contentDescription = "fan",
+            modifier = Modifier
+                .rotate(rotationAngle)
+                .size(150.dp)
+        )
     }
 }

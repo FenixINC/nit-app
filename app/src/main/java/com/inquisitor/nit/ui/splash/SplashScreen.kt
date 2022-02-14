@@ -12,8 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
-fun SplashScreen() {
-    val splashViewModel = hiltViewModel<SplashViewModel>()
+fun SplashScreen(splashViewModel: SplashViewModel = hiltViewModel()) {
     BackHandler(onBack = { splashViewModel.onCloseApp() })
 
     LaunchedEffect(key1 = Unit) {

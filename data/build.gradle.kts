@@ -31,8 +31,6 @@ android {
 }
 
 dependencies {
-//    implementation(project(":domain"))
-
     // Kotlin Coroutines
     implementation(dependencyNotation = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")
 
@@ -49,12 +47,10 @@ dependencies {
     // Kotlin Serialization
     implementation(dependencyNotation = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2")
 
-//    implementation 'androidx.core:core-ktx:1.7.0'
-//    implementation 'androidx.appcompat:appcompat:1.4.1'
-//    implementation 'com.google.android.material:material:1.5.0'
-
-//    testImplementation 'junit:junit:4.+'
-//    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    // Test
+    testImplementation(dependencyNotation = "junit:junit:4.13.2")
+    testImplementation(dependencyNotation = "org.mockito.kotlin:mockito-kotlin:3.2.0")
+    androidTestImplementation(dependencyNotation = "androidx.test.ext:junit:1.1.3")
+    androidTestImplementation(dependencyNotation = "androidx.test.espresso:espresso-core:3.4.0")
     testImplementation(dependencyNotation = "com.squareup.okhttp3:mockwebserver:3.12.0")
 }

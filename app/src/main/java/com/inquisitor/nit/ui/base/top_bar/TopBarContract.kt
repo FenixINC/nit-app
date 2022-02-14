@@ -1,4 +1,4 @@
-package com.inquisitor.nit.ui.base
+package com.inquisitor.nit.ui.base.top_bar
 
 import com.example.mobicatestapp.viewmodel.base.ViewEffect
 import com.example.mobicatestapp.viewmodel.base.ViewEvent

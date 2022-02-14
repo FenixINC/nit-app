@@ -1,4 +1,4 @@
-package com.inquisitor.nit.ui.base
+package com.inquisitor.nit.ui.base.top_bar
 
 import androidx.lifecycle.viewModelScope
 import com.inquisitor.nit.base.BaseViewModel
@@ -8,7 +8,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ToolbarViewModel @Inject constructor(
+class NitTopBarViewModel @Inject constructor(
     private val navigator: Navigator
 ) : BaseViewModel<ToolbarEvent, ToolbarState, ToolbarEffect>(), Navigator by navigator {
 
