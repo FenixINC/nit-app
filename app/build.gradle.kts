@@ -37,7 +37,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.1.0-rc01"
+        kotlinCompilerExtensionVersion = "1.2.0-alpha03"
     }
     packagingOptions {
         resources {
@@ -59,15 +59,15 @@ dependencies {
     implementation(dependencyNotation = "com.google.android.material:material:1.5.0")
 
     // Compose
-    implementation(dependencyNotation = "androidx.compose.compiler:compiler:1.2.0-alpha02")
-    implementation(dependencyNotation = "androidx.compose.runtime:runtime:1.2.0-alpha02")
-    implementation(dependencyNotation = "androidx.compose.ui:ui:1.2.0-alpha02")
+    implementation(dependencyNotation = "androidx.compose.compiler:compiler:1.2.0-alpha03")
+    implementation(dependencyNotation = "androidx.compose.runtime:runtime:1.2.0-alpha03")
+    implementation(dependencyNotation = "androidx.compose.ui:ui:1.2.0-alpha03")
     implementation(dependencyNotation = "androidx.compose.ui:ui-tooling-preview:1.2.0-alpha02")
     // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
-    implementation(dependencyNotation = "androidx.compose.foundation:foundation:1.2.0-alpha02")
+    implementation(dependencyNotation = "androidx.compose.foundation:foundation:1.2.0-alpha03")
     // Material Design, Icons
-    implementation(dependencyNotation = "androidx.compose.material:material:1.2.0-alpha02")
-    implementation(dependencyNotation = "androidx.compose.material:material-icons-core:1.2.0-alpha02")
+    implementation(dependencyNotation = "androidx.compose.material:material:1.2.0-alpha03")
+    implementation(dependencyNotation = "androidx.compose.material:material-icons-core:1.2.0-alpha03")
     implementation(dependencyNotation = "androidx.compose.material:material-icons-extended:1.2.0-alpha02")
     // Integration with activities
     implementation(dependencyNotation = "androidx.activity:activity-compose:1.4.0")
@@ -81,6 +81,8 @@ dependencies {
     implementation(dependencyNotation = "androidx.navigation:navigation-compose:2.5.0-alpha02")
     // Accompanist Shimmer
     implementation(dependencyNotation = "com.google.accompanist:accompanist-placeholder-material:0.24.1-alpha")
+    // Navigation Compose Animations
+    implementation(dependencyNotation = "com.google.accompanist:accompanist-navigation-animation:0.24.2-alpha")
 
     // Coil
     implementation(dependencyNotation = "io.coil-kt:coil-compose:1.4.0")
