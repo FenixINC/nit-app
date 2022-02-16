@@ -38,7 +38,7 @@ dependencies {
     implementation(dependencyNotation = "com.google.android.material:material:1.5.0")
 
     // Navigation Hilt
-    implementation(dependencyNotation = "androidx.navigation:navigation-compose:2.4.0-rc01")
+    implementation(dependencyNotation = "androidx.navigation:navigation-compose:2.5.0-alpha02")
 
     // Hilt
     implementation(dependencyNotation = "com.google.dagger:hilt-android:2.40.5")

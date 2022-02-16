@@ -49,7 +49,7 @@ dependencies {
 
     // Test
     testImplementation(dependencyNotation = "junit:junit:4.13.2")
-    testImplementation(dependencyNotation = "org.mockito.kotlin:mockito-kotlin:3.2.0")
+    testImplementation(dependencyNotation = "org.mockito.kotlin:mockito-kotlin:4.0.0")
     androidTestImplementation(dependencyNotation = "androidx.test.ext:junit:1.1.3")
     androidTestImplementation(dependencyNotation = "androidx.test.espresso:espresso-core:3.4.0")
     testImplementation(dependencyNotation = "com.squareup.okhttp3:mockwebserver:3.12.0")
