@@ -49,11 +49,14 @@ android {
 dependencies {
     implementation(project(":domain"))
     implementation(project(":data"))
+    implementation(project(":feature-profile"))
 
     // AndroidX
     implementation(dependencyNotation = "androidx.core:core-ktx:1.7.0")
     implementation(dependencyNotation = "androidx.appcompat:appcompat:1.4.1")
-    implementation(dependencyNotation = "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0")
+    implementation(dependencyNotation = "androidx.lifecycle:lifecycle-runtime-ktx:2.4.1")
+    // Navigation
+    api(dependencyNotation = "androidx.navigation:navigation-fragment-ktx:2.4.1")
 
     // Material
     implementation(dependencyNotation = "com.google.android.material:material:1.5.0")
@@ -62,7 +65,7 @@ dependencies {
     implementation(dependencyNotation = "androidx.compose.compiler:compiler:1.2.0-alpha03")
     implementation(dependencyNotation = "androidx.compose.runtime:runtime:1.2.0-alpha03")
     implementation(dependencyNotation = "androidx.compose.ui:ui:1.2.0-alpha03")
-    implementation(dependencyNotation = "androidx.compose.ui:ui-tooling-preview:1.2.0-alpha02")
+    implementation(dependencyNotation = "androidx.compose.ui:ui-tooling-preview:1.2.0-alpha03")
     // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
     implementation(dependencyNotation = "androidx.compose.foundation:foundation:1.2.0-alpha03")
     // Material Design, Icons

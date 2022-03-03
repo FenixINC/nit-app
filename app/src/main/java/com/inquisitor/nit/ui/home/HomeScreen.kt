@@ -69,7 +69,7 @@ private fun HomeScreenContent(
         animationSpec = tween(durationMillis = 2500)
     )
 
-    LaunchedEffect(isAnimated) {
+    LaunchedEffect(key1 = isAnimated) {
         colorState.animateTo(
             targetValue = if (isAnimated) {
                 Color.Green

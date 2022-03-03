@@ -9,3 +9,4 @@ rootProject.name = "nit-app"
 include ':app'
 include ':domain'
 include ':data'
+include ':feature-profile'

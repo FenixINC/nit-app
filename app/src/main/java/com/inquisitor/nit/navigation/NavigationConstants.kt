@@ -7,4 +7,5 @@ object NavigationConstants {
     const val ROUTE_LOGIN = "route_login"
     const val ROUTE_HOME = "route_home"
     const val ROUTE_COLLECTION_DETAILS = "route_collection_details"
+    const val ROUTE_PROFILE = "route_profile"
 }

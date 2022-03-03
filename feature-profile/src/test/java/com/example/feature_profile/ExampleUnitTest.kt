@@ -1,4 +1,4 @@
-package com.inquisitor.navigation
+package com.example.feature_profile
 
 import org.junit.Test
 

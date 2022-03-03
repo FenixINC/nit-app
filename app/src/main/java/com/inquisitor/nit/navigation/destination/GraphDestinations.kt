@@ -4,6 +4,8 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
+import androidx.navigation.fragment.fragment
+import com.example.feature_profile.fragment.ProfileFragment
 import com.google.accompanist.navigation.animation.composable
 import com.inquisitor.nit.constants.StringConstants.EMPTY_TEXT
 import com.inquisitor.nit.navigation.NavigationConstants.ARG_COLLECTION_ID
@@ -28,6 +30,11 @@ private fun getComposableDestinations(): Map<NavigationDestination, @Composable 
         }
     )
 
+private fun getFragmentDestinations(): Map<NavigationDestination, (NavBackStackEntry) -> Unit> =
+    mapOf(
+        ProfileDestination to { ProfileFragment() }
+    )
+
 @OptIn(ExperimentalAnimationApi::class)
 fun NavGraphBuilder.addComposableDestinations() {
     getComposableDestinations().forEach { entry ->
@@ -39,6 +46,22 @@ fun NavGraphBuilder.addComposableDestinations() {
             destination.deepLinks
         ) { navBackStackEntry ->
             entry.value(navBackStackEntry)
+        }
+    }
+}
+
+fun NavGraphBuilder.addFragmentDestinations() {
+    getFragmentDestinations().forEach { entry ->
+        val destination = entry.key
+
+        when (destination) {
+            is ProfileDestination -> {
+                fragment<ProfileFragment>(route = destination.route()) {
+                    destination.route()
+                    destination.arguments
+                    destination.deepLinks
+                }
+            }
         }
     }
 }
