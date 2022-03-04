@@ -1,10 +1,8 @@
 package com.inquisitor.nit.ui.base.top_bar
 
-import androidx.lifecycle.viewModelScope
 import com.example.navigation.Navigator
 import com.inquisitor.nit.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -22,6 +20,9 @@ class NitTopBarViewModel @Inject constructor(
             is ToolbarEvent.OpenMenu -> {
                 openMenu()
             }
+            is ToolbarEvent.OpenMore -> {
+
+            }
             is ToolbarEvent.NavigateUp -> {
                 onBack()
             }
@@ -29,20 +30,14 @@ class NitTopBarViewModel @Inject constructor(
     }
 
     private fun openProfile() {
-        viewModelScope.launch {
 
-        }
     }
 
     private fun openMenu() {
-        viewModelScope.launch {
 
-        }
     }
 
     private fun onBack() {
-        viewModelScope.launch {
-            navigator.navigateUp()
-        }
+        navigator.navigateUp()
     }
 }

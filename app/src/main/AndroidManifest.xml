@@ -18,6 +18,7 @@
             android:name="com.inquisitor.nit.ui.main.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Nitapp.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

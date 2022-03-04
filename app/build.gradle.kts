@@ -47,6 +47,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":common-resources"))
     implementation(project(":domain"))
     implementation(project(":data"))
     implementation(project(":navigation"))
@@ -71,6 +72,7 @@ dependencies {
     implementation(dependencyNotation = "androidx.compose.runtime:runtime:1.2.0-alpha04")
     implementation(dependencyNotation = "androidx.compose.ui:ui:1.2.0-alpha04")
     implementation(dependencyNotation = "androidx.compose.ui:ui-tooling-preview:1.2.0-alpha04")
+    implementation(dependencyNotation = "androidx.constraintlayout:constraintlayout-compose:1.0.0")
     // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
     implementation(dependencyNotation = "androidx.compose.foundation:foundation:1.2.0-alpha04")
     // Material Design, Icons

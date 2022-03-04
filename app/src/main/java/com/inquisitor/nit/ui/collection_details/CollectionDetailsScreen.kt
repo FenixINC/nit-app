@@ -31,7 +31,7 @@ fun CollectionDetailsScreen(
             modifier = Modifier
                 .wrapContentSize()
         ) {
-            NitTopBar(topBarState = mutableStateOf(value = true))
+            NitTopBar(iconBackState = mutableStateOf(value = true))
         }
 
         Spacer(

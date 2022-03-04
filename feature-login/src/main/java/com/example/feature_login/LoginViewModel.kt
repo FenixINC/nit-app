@@ -10,6 +10,10 @@ class LoginViewModel @Inject constructor(
     private val navigator: Navigator
 ) : BaseViewModel<LoginEvent, LoginState, LoginEffect>(), Navigator by navigator {
 
+    init {
+        navigator.topBar(isShowTopBar = true)
+    }
+
     override fun setInitialState(): LoginState = LoginState.Idle
 
     override fun handleEvents(event: LoginEvent) {
