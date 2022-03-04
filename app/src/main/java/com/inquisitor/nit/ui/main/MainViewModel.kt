@@ -2,10 +2,9 @@ package com.inquisitor.nit.ui.main
 
 import android.os.Build
 import androidx.lifecycle.viewModelScope
+import com.example.navigation.Navigator
+import com.example.navigation.NavigatorEvent
 import com.inquisitor.nit.base.BaseViewModel
-import com.inquisitor.nit.navigation.Navigator
-import com.inquisitor.nit.navigation.NavigatorEvent
-import com.inquisitor.nit.network_connection.NetworkStatusResultState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -57,16 +56,16 @@ class MainViewModel @Inject constructor(
                     is NavigatorEvent.Error -> {
                         // TODO: show error
                     }
-                    is NavigatorEvent.InternetConnectionState -> {
-                        when (navigationEvent.networkStatusResultState) {
-                            is NetworkStatusResultState.Success -> {
-                                setEffect { MainEffect.InternetConnection(isSuccess = true) }
-                            }
-                            is NetworkStatusResultState.Error -> {
-                                setEffect { MainEffect.InternetConnection(isSuccess = false) }
-                            }
-                        }
-                    }
+//                    is NavigatorEvent.InternetConnectionState -> {
+//                        when (navigationEvent.networkStatusResultState) {
+//                            is NetworkStatusResultState.Success -> {
+//                                setEffect { MainEffect.InternetConnection(isSuccess = true) }
+//                            }
+//                            is NetworkStatusResultState.Error -> {
+//                                setEffect { MainEffect.InternetConnection(isSuccess = false) }
+//                            }
+//                        }
+//                    }
                     is NavigatorEvent.Directions -> {
                         setEffect {
                             MainEffect.Navigate(

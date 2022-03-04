@@ -10,7 +10,7 @@ fun CheckInternetConnection(
     networkStatusViewModel: NetworkStatusViewModel = hiltViewModel()
 ) {
     LaunchedEffect(key1 = Unit) {
-        networkStatusViewModel.state.collectLatest { networkStatusResultState ->
+        networkStatusViewModel.networkStatusState.collectLatest { networkStatusResultState ->
             networkStatusViewModel.sendInternetConnectionState(
                 networkStatusResultState = networkStatusResultState
             )

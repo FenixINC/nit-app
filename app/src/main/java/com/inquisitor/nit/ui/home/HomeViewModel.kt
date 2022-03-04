@@ -1,6 +1,7 @@
 package com.inquisitor.nit.ui.home
 
 import androidx.lifecycle.viewModelScope
+import com.example.navigation.Navigator
 import com.inquisitor.domain.model.CollectionModel
 import com.inquisitor.domain.model.PhotoModel
 import com.inquisitor.domain.model.VideoModel
@@ -12,8 +13,6 @@ import com.inquisitor.nit.constants.MediaConstants.MEDIA_TYPE_ANIMALS
 import com.inquisitor.nit.constants.MediaConstants.MEDIA_TYPE_NATURE
 import com.inquisitor.nit.constants.MediaConstants.MEDIA_TYPE_RECOMMENDED
 import com.inquisitor.nit.constants.MediaConstants.MEDIA_TYPE_TRENDS
-import com.inquisitor.nit.navigation.Navigator
-import com.inquisitor.nit.navigation.destination.CollectionDetailsDestination
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -43,11 +42,11 @@ class HomeViewModel @Inject constructor(
                 loadMediaAsync()
             }
             is HomeEvent.OpenCollectionDetails -> {
-                navigator.navigate(
-                    route = CollectionDetailsDestination.createCollectionDetailsDestination(
-                        collectionId = event.collectionId
-                    )
-                )
+//                navigator.navigate(
+//                    route = CollectionDetailsDestination.createCollectionDetailsDestination(
+//                        collectionId = event.collectionId
+//                    )
+//                )
             }
         }
     }

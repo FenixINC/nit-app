@@ -4,35 +4,33 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
-import androidx.navigation.fragment.fragment
-import com.example.feature_profile.fragment.ProfileFragment
+import com.example.feature_home.HomeScreen
+import com.example.feature_login.LoginScreen
+import com.example.feature_splash.SplashScreen
+import com.example.navigation.NavigationDestination
+import com.example.navigation.destination.HomeDestination
+import com.example.navigation.destination.LoginDestination
+import com.example.navigation.destination.SplashDestination
 import com.google.accompanist.navigation.animation.composable
-import com.inquisitor.nit.constants.StringConstants.EMPTY_TEXT
-import com.inquisitor.nit.navigation.NavigationConstants.ARG_COLLECTION_ID
-import com.inquisitor.nit.navigation.NavigationDestination
-import com.inquisitor.nit.ui.collection_details.CollectionDetailsScreen
-import com.inquisitor.nit.ui.home.HomeScreen
-import com.inquisitor.nit.ui.login.LoginScreen
-import com.inquisitor.nit.ui.splash.SplashScreen
 
 private fun getComposableDestinations(): Map<NavigationDestination, @Composable (NavBackStackEntry) -> Unit> =
     mapOf(
         SplashDestination to { SplashScreen() },
         LoginDestination to { LoginScreen() },
         HomeDestination to { HomeScreen() },
-        CollectionDetailsDestination to { navBackStackEntry ->
-            val collectionId = navBackStackEntry
-                .arguments
-                ?.getString(ARG_COLLECTION_ID)
-                ?: EMPTY_TEXT
-
-            CollectionDetailsScreen(collectionId = collectionId)
-        }
+//        CollectionDetailsDestination to { navBackStackEntry ->
+//            val collectionId = navBackStackEntry
+//                .arguments
+//                ?.getString(ARG_COLLECTION_ID)
+//                ?: EMPTY_TEXT
+//
+//            CollectionDetailsScreen(collectionId = collectionId)
+//        }
     )
 
 private fun getFragmentDestinations(): Map<NavigationDestination, (NavBackStackEntry) -> Unit> =
     mapOf(
-        ProfileDestination to { ProfileFragment() }
+//        ProfileDestination to { ProfileFragment() }
     )
 
 @OptIn(ExperimentalAnimationApi::class)
@@ -54,14 +52,14 @@ fun NavGraphBuilder.addFragmentDestinations() {
     getFragmentDestinations().forEach { entry ->
         val destination = entry.key
 
-        when (destination) {
-            is ProfileDestination -> {
-                fragment<ProfileFragment>(route = destination.route()) {
-                    destination.route()
-                    destination.arguments
-                    destination.deepLinks
-                }
-            }
-        }
+//        when (destination) {
+//            is ProfileDestination -> {
+//                fragment<ProfileFragment>(route = destination.route()) {
+//                    destination.route()
+//                    destination.arguments
+//                    destination.deepLinks
+//                }
+//            }
+//        }
     }
 }

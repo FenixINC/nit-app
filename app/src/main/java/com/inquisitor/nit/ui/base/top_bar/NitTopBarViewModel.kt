@@ -1,8 +1,8 @@
 package com.inquisitor.nit.ui.base.top_bar
 
 import androidx.lifecycle.viewModelScope
+import com.example.navigation.Navigator
 import com.inquisitor.nit.base.BaseViewModel
-import com.inquisitor.nit.navigation.Navigator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
