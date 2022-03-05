@@ -7,7 +7,7 @@ val gray2 = Color(color = 0xFF212121)
 val gray3 = Color(color = 0xFF79767D)
 
 val background = Color(color = 0xFF1E2121)
-val background50Opacity = Color(color = 0xFF1E2121).copy(alpha = 0.5F)
+val background50Opacity = Color(color = 0x801E2121)
 
 val yellow = Color(color = 0xFFF2FE8D)
 val yellowLight = Color(color = 0xFFFCFFDF)

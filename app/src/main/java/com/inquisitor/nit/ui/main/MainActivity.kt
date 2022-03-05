@@ -11,16 +11,14 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Surface
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.SideEffect
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.example.common_resources.background50Opacity
+import androidx.navigation.NavController
+import com.example.common_resources.background
 import com.example.common_ui.top_bar.HomeTopBar
 import com.example.common_ui.top_bar.LoginTopBar
 import com.example.navigation.destination.SplashDestination
@@ -50,20 +48,25 @@ class MainActivity : AppCompatActivity() {
                     if (mainState.isComposeNavigation) {
                         setContent {
                             // TODO: fix calling systemUiController
-                            val systemUiController = rememberSystemUiController()
-
-                            SideEffect {
-                                systemUiController.setStatusBarColor(color = Color.Transparent)
-                            }
-
+                            val systemUiControllerState = rememberSystemUiController()
+                            val navControllerState = rememberAnimatedNavController()
                             val topBarProviderState = remember {
                                 mutableStateOf(value = TopBarProvider())
                             }
 
-//                            NitappTheme {
-                            Surface(color = background50Opacity) {
-                                val navController = rememberAnimatedNavController()
+                            SideEffect {
+                                systemUiControllerState.setStatusBarColor(color = Color.Transparent)
+                            }
 
+                            ObserveEffect(
+                                navController = navControllerState,
+                                updateTopBarProviderState = { topBarProvider ->
+                                    topBarProviderState.value = topBarProvider
+                                }
+                            )
+
+//                            NitappTheme {
+                            Surface(color = background) {
                                 Column(modifier = Modifier.fillMaxSize()) {
                                     val topBarType = topBarProviderState.value.topBarType
                                     AnimatedVisibility(
@@ -90,45 +93,8 @@ class MainActivity : AppCompatActivity() {
                                         }
                                     }
 
-                                    LaunchedEffect(navController) {
-                                        mainViewModel.effect.collectLatest { effect ->
-                                            when (effect) {
-                                                is MainEffect.CloseApp -> {
-                                                    this@MainActivity.finish()
-                                                }
-                                                is MainEffect.TopBar -> {
-                                                    topBarProviderState.value =
-                                                        effect.topBarProvider
-                                                }
-                                                is MainEffect.NavigateUp -> {
-                                                    navController.navigateUp()
-                                                }
-                                                is MainEffect.Error -> {
-                                                    when (effect.throwable) {
-                                                        // TODO: show error
-                                                    }
-                                                }
-                                                is MainEffect.Navigate -> {
-                                                    navController.navigate(
-                                                        route = effect.destination,
-                                                        builder = effect.builder
-                                                    )
-                                                }
-                                                is MainEffect.InternetConnection -> {
-                                                    when (effect.isSuccess) {
-                                                        true -> {
-                                                            // TODO: success connect
-                                                        }
-                                                        false -> {
-                                                            // TODO: show internet connection error
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
                                     AnimatedNavHost(
-                                        navController = navController,
+                                        navController = navControllerState,
                                         startDestination = SplashDestination.route(),
                                         builder = {
                                             addComposableDestinations()
@@ -178,6 +144,49 @@ class MainActivity : AppCompatActivity() {
 //                            startDestination = ProfileDestination.route(),
 //                            builder = { addFragmentDestinations() }
 //                        )
+                    }
+                }
+            }
+        }
+    }
+
+    @Composable
+    private fun ObserveEffect(
+        navController: NavController,
+        updateTopBarProviderState: (TopBarProvider) -> Unit
+    ) {
+        LaunchedEffect(navController) {
+            mainViewModel.effect.collectLatest { effect ->
+                when (effect) {
+                    is MainEffect.CloseApp -> {
+                        this@MainActivity.finish()
+                    }
+                    is MainEffect.TopBar -> {
+                        updateTopBarProviderState(effect.topBarProvider)
+                    }
+                    is MainEffect.NavigateUp -> {
+                        navController.navigateUp()
+                    }
+                    is MainEffect.Error -> {
+                        when (effect.throwable) {
+                            // TODO: show error
+                        }
+                    }
+                    is MainEffect.Navigate -> {
+                        navController.navigate(
+                            route = effect.destination,
+                            builder = effect.builder
+                        )
+                    }
+                    is MainEffect.InternetConnection -> {
+                        when (effect.isSuccess) {
+                            true -> {
+                                // TODO: success connect
+                            }
+                            false -> {
+                                // TODO: show internet connection error
+                            }
+                        }
                     }
                 }
             }
