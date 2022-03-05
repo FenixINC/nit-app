@@ -1,10 +1,9 @@
-package com.inquisitor.nit.ui.home
+package com.example.feature_home.test_home
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.Animatable
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
@@ -16,22 +15,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.inquisitor.domain.model.CollectionModel
-import com.inquisitor.nit.R
-import com.inquisitor.nit.ui.resources.space16dp
-import com.inquisitor.nit.ui.resources.space8dp
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
-fun HomeScreen(homeViewModel: HomeViewModel = hiltViewModel()) {
-    BackHandler(onBack = { homeViewModel.setEvent(event = HomeEvent.CloseApp) })
+fun TestHomeScreen(testHomeViewModel: TestHomeViewModel = hiltViewModel()) {
+    BackHandler(onBack = { testHomeViewModel.setEvent(event = TestHomeEvent.CloseApp) })
 
-    val homeState = homeViewModel.viewState.collectAsState()
-    val homeEffect = homeViewModel.effect
+    val homeState = testHomeViewModel.viewState.collectAsState()
+    val homeEffect = testHomeViewModel.effect
 
     Column(modifier = Modifier.fillMaxSize()) {
         Box(
@@ -41,7 +36,7 @@ fun HomeScreen(homeViewModel: HomeViewModel = hiltViewModel()) {
             HomeScreenContent(
                 homeState = homeState.value,
                 homeEffect = homeEffect,
-                homeViewModel = homeViewModel
+                testHomeViewModel = testHomeViewModel
             )
         }
     }
@@ -52,9 +47,9 @@ fun HomeScreen(homeViewModel: HomeViewModel = hiltViewModel()) {
 
 @Composable
 private fun HomeScreenContent(
-    homeState: HomeState,
-    homeEffect: Flow<HomeEffect>,
-    homeViewModel: HomeViewModel
+    homeState: TestHomeState,
+    homeEffect: Flow<TestHomeEffect>,
+    testHomeViewModel: TestHomeViewModel
 ) {
     var isAnimated by remember { mutableStateOf(value = false) }
     val colorState = remember { Animatable(Color.DarkGray) }
@@ -83,7 +78,7 @@ private fun HomeScreenContent(
     LaunchedEffect(key1 = Unit) {
         homeEffect.collectLatest { effect ->
             when (effect) {
-                is HomeEffect.Loading -> {
+                is TestHomeEffect.Loading -> {
 
                 }
             }
@@ -98,8 +93,8 @@ private fun HomeScreenContent(
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight(),
-            contentPadding = PaddingValues(horizontal = space16dp),
-            horizontalArrangement = Arrangement.spacedBy(space = space8dp),
+            contentPadding = PaddingValues(horizontal = 16.dp),
+            horizontalArrangement = Arrangement.spacedBy(space = 8.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             items(
@@ -114,8 +109,8 @@ private fun HomeScreenContent(
                 CollectionRow(
                     collectionModel = collectionModel,
                     onCollectionClick = { collection ->
-                        homeViewModel.setEvent(
-                            event = HomeEvent.OpenCollectionDetails(collectionId = collection.id)
+                        testHomeViewModel.setEvent(
+                            event = TestHomeEvent.OpenCollectionDetails(collectionId = collection.id)
                         )
                     }
                 )
@@ -154,12 +149,12 @@ private fun HomeScreenContent(
                 .height(height = 50.dp)
         )
 
-        Image(
-            painter = painterResource(id = R.drawable.item1),
-            contentDescription = "fan",
-            modifier = Modifier
-                .rotate(rotationAngle)
-                .size(150.dp)
-        )
+//        Image(
+//            painter = painterResource(id = R.drawable.item1),
+//            contentDescription = "fan",
+//            modifier = Modifier
+//                .rotate(rotationAngle)
+//                .size(150.dp)
+//        )
     }
 }

@@ -1,7 +1,7 @@
-package com.inquisitor.nit.ui.base.top_bar
+package com.example.common_ui.top_bar
 
+import com.example.common_viewmodel.BaseViewModel
 import com.example.navigation.Navigator
-import com.inquisitor.nit.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

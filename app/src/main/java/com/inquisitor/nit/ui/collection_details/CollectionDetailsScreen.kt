@@ -11,7 +11,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.inquisitor.nit.ui.base.top_bar.NitTopBar
+import com.example.common_ui.top_bar.NitTopBar
 import com.inquisitor.nit.ui.resources.space16dp
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest

@@ -4,6 +4,7 @@ import androidx.navigation.NavOptionsBuilder
 import com.example.mobicatestapp.viewmodel.base.ViewEffect
 import com.example.mobicatestapp.viewmodel.base.ViewEvent
 import com.example.mobicatestapp.viewmodel.base.ViewState
+import com.example.navigation.top_bar_config.TopBarProvider
 
 data class MainState(
     val isLoading: Boolean = false,
@@ -19,11 +20,7 @@ sealed class MainEvent : ViewEvent {
 }
 
 sealed class MainEffect : ViewEffect {
-    data class TopBar(
-        val isShowToolbar: Boolean,
-        val isShowIconMore: Boolean
-    ) : MainEffect()
-
+    data class TopBar(val topBarProvider: TopBarProvider) : MainEffect()
     data class Error(val throwable: Throwable) : MainEffect()
     data class Navigate(
         val destination: String,

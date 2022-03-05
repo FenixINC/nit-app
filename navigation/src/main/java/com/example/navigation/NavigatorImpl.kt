@@ -1,6 +1,7 @@
 package com.example.navigation
 
 import androidx.navigation.NavOptionsBuilder
+import com.example.navigation.top_bar_config.TopBarProvider
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import javax.inject.Inject
@@ -19,16 +20,10 @@ class NavigatorImpl @Inject constructor() : Navigator {
         navigationEvents.trySend(element = NavigatorEvent.Error(throwable = throwable)).isSuccess
 
     override fun topBar(
-        isShowTopBar: Boolean,
-        isShowBackButton: Boolean,
-        isShowIconProfile: Boolean,
-        isShowIconMore: Boolean
+        topBarProvider: TopBarProvider
     ) = navigationEvents.trySend(
         element = NavigatorEvent.TopBar(
-            isShowTopBar = isShowTopBar,
-            isShowBackButton = isShowBackButton,
-            isShowIconProfile = isShowIconProfile,
-            isShowIconMore = isShowIconMore
+            topBarProvider = topBarProvider
         )
     ).isSuccess
 

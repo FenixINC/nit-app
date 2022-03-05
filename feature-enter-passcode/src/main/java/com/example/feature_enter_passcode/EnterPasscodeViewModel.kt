@@ -5,6 +5,9 @@ import com.example.common_viewmodel.BaseViewModel
 import com.example.navigation.NavigationConstants.ROUTE_HOME
 import com.example.navigation.NavigationConstants.ROUTE_LOGIN
 import com.example.navigation.Navigator
+import com.example.navigation.top_bar_config.TopBarLoginConfig
+import com.example.navigation.top_bar_config.TopBarProvider
+import com.example.navigation.top_bar_config.TopBarType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -17,7 +20,15 @@ class EnterPasscodeViewModel @Inject constructor(
     Navigator by navigator {
 
     init {
-        navigator.topBar(isShowTopBar = true, isShowIconMore = true)
+        navigator.topBar(
+            topBarProvider = TopBarProvider(
+                topBarType = TopBarType.LOGIN,
+                topBarLoginConfig = TopBarLoginConfig(
+                    iconLogo = R.drawable.ic_logo,
+                    iconMore = R.drawable.ic_more
+                )
+            )
+        )
     }
 
     override fun setInitialState(): EnterPasscodeState = EnterPasscodeState.Idle

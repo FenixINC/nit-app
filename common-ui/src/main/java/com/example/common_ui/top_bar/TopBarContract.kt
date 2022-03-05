@@ -1,8 +1,8 @@
-package com.inquisitor.nit.ui.base.top_bar
+package com.example.common_ui.top_bar
 
-import com.example.mobicatestapp.viewmodel.base.ViewEffect
-import com.example.mobicatestapp.viewmodel.base.ViewEvent
-import com.example.mobicatestapp.viewmodel.base.ViewState
+import com.example.common_viewmodel.ViewEffect
+import com.example.common_viewmodel.ViewEvent
+import com.example.common_viewmodel.ViewState
 
 object ToolbarState : ViewState
 

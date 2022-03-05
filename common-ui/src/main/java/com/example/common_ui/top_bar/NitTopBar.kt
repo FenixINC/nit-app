@@ -1,4 +1,4 @@
-package com.inquisitor.nit.ui.base.top_bar
+package com.example.common_ui.top_bar
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
@@ -16,8 +16,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.inquisitor.nit.R
-import com.inquisitor.nit.ui.resources.toolbarHeight
+import com.example.common_resources.toolbarHeight
+import com.example.common_ui.R
 
 @Composable
 fun NitTopBar(

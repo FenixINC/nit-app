@@ -21,13 +21,16 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.common_resources.background50Opacity
+import com.example.common_ui.top_bar.HomeTopBar
+import com.example.common_ui.top_bar.LoginTopBar
 import com.example.navigation.destination.SplashDestination
+import com.example.navigation.top_bar_config.TopBarProvider
+import com.example.navigation.top_bar_config.TopBarType
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.inquisitor.nit.navigation.destination.addComposableDestinations
 import com.inquisitor.nit.network_connection.CheckInternetConnection
-import com.inquisitor.nit.ui.base.top_bar.NitTopBar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -53,16 +56,38 @@ class MainActivity : AppCompatActivity() {
                                 systemUiController.setStatusBarColor(color = Color.Transparent)
                             }
 
-                            val isShowToolbarState = remember { mutableStateOf(value = false) }
-                            val iconMoreState = remember { mutableStateOf(value = false) }
+                            val topBarProviderState = remember {
+                                mutableStateOf(value = TopBarProvider())
+                            }
 
 //                            NitappTheme {
                             Surface(color = background50Opacity) {
                                 val navController = rememberAnimatedNavController()
 
                                 Column(modifier = Modifier.fillMaxSize()) {
-                                    AnimatedVisibility(visible = isShowToolbarState.value) {
-                                        NitTopBar(iconMoreState = iconMoreState)
+                                    val topBarType = topBarProviderState.value.topBarType
+                                    AnimatedVisibility(
+                                        visible = topBarType != TopBarType.EMPTY
+                                    ) {
+                                        when (topBarType) {
+                                            TopBarType.LOGIN -> {
+                                                LoginTopBar(
+                                                    topBarLoginConfig = topBarProviderState
+                                                        .value
+                                                        .topBarLoginConfig
+                                                )
+                                            }
+                                            TopBarType.HOME -> {
+                                                HomeTopBar(
+                                                    topBarHomeConfig = topBarProviderState
+                                                        .value
+                                                        .topBarHomeConfig
+                                                )
+                                            }
+                                            TopBarType.CARD_DETAILS -> {
+
+                                            }
+                                        }
                                     }
 
                                     LaunchedEffect(navController) {
@@ -72,8 +97,8 @@ class MainActivity : AppCompatActivity() {
                                                     this@MainActivity.finish()
                                                 }
                                                 is MainEffect.TopBar -> {
-                                                    isShowToolbarState.value = effect.isShowToolbar
-                                                    iconMoreState.value = effect.isShowIconMore
+                                                    topBarProviderState.value =
+                                                        effect.topBarProvider
                                                 }
                                                 is MainEffect.NavigateUp -> {
                                                     navController.navigateUp()

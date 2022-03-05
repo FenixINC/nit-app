@@ -48,6 +48,7 @@ android {
 
 dependencies {
     implementation(project(":common-resources"))
+    implementation(project(":common-ui"))
     implementation(project(":domain"))
     implementation(project(":data"))
     implementation(project(":navigation"))

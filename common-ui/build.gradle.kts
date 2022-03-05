@@ -48,16 +48,16 @@ android {
 }
 
 dependencies {
-    implementation(project(":common-viewmodel"))
-    implementation(project(":common-resources"))
-    implementation(project(":navigation"))
-    implementation(project(":domain"))
+    implementation(project(path =":common-viewmodel"))
+    implementation(project(path =":common-resources"))
+    implementation(project(path =":navigation"))
 
     // AndroidX
     implementation(dependencyNotation = "androidx.core:core-ktx:1.7.0")
     implementation(dependencyNotation = "androidx.appcompat:appcompat:1.4.1")
     implementation(dependencyNotation = "androidx.lifecycle:lifecycle-runtime-ktx:2.4.1")
     implementation(dependencyNotation = "androidx.fragment:fragment-ktx:1.4.1")
+    implementation(dependencyNotation = "androidx.constraintlayout:constraintlayout-compose:1.0.0")
 
     // Material
     implementation(dependencyNotation = "com.google.android.material:material:1.5.0")

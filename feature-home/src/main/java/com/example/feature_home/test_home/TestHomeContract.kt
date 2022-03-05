@@ -1,13 +1,13 @@
-package com.inquisitor.nit.ui.home
+package com.example.feature_home.test_home
 
-import com.example.mobicatestapp.viewmodel.base.ViewEffect
-import com.example.mobicatestapp.viewmodel.base.ViewEvent
-import com.example.mobicatestapp.viewmodel.base.ViewState
+import com.example.common_viewmodel.ViewEffect
+import com.example.common_viewmodel.ViewEvent
+import com.example.common_viewmodel.ViewState
 import com.inquisitor.domain.model.CollectionModel
 import com.inquisitor.domain.model.PhotoModel
 import com.inquisitor.domain.model.VideoModel
 
-data class HomeState(
+data class TestHomeState(
     val collectionList: List<CollectionModel>? = null,
 
     val recommendedPhotoList: List<PhotoModel>? = null,
@@ -23,12 +23,12 @@ data class HomeState(
     val trendsVideoList: List<VideoModel>? = null
 ) : ViewState
 
-sealed class HomeEvent : ViewEvent {
-    object CloseApp : HomeEvent()
-    object LoadMedia : HomeEvent()
-    data class OpenCollectionDetails(val collectionId: String) : HomeEvent()
+sealed class TestHomeEvent : ViewEvent {
+    object CloseApp : TestHomeEvent()
+    object LoadMedia : TestHomeEvent()
+    data class OpenCollectionDetails(val collectionId: String) : TestHomeEvent()
 }
 
-sealed class HomeEffect : ViewEffect {
-    data class Loading(val isLoading: Boolean = false) : HomeEffect()
+sealed class TestHomeEffect : ViewEffect {
+    data class Loading(val isLoading: Boolean = false) : TestHomeEffect()
 }

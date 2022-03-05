@@ -1,6 +1,7 @@
 package com.example.navigation
 
 import androidx.navigation.NavOptionsBuilder
+import com.example.navigation.top_bar_config.TopBarProvider
 import kotlinx.coroutines.flow.Flow
 
 interface Navigator {
@@ -10,12 +11,7 @@ interface Navigator {
 
     fun onError(throwable: Throwable): Boolean
 
-    fun topBar(
-        isShowTopBar: Boolean = false,
-        isShowBackButton: Boolean = false,
-        isShowIconProfile: Boolean = false,
-        isShowIconMore: Boolean = false
-    ): Boolean
+    fun topBar(topBarProvider: TopBarProvider = TopBarProvider()): Boolean
 
     fun navigateUp(): Boolean
 
