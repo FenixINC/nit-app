@@ -9,6 +9,7 @@ sealed class NavigatorEvent {
     object NavigateUp : NavigatorEvent()
 
     data class TopBar(val topBarProvider: TopBarProvider) : NavigatorEvent()
+    data class BottomBar(val isShowBottomBar: Boolean) : NavigatorEvent()
 
     data class Error(
         val throwable: Throwable

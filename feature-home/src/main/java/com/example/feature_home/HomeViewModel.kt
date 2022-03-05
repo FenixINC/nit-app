@@ -25,6 +25,7 @@ class HomeViewModel @Inject constructor(
                 )
             )
         )
+        navigator.bottomBar(isShowBottomBar = true)
     }
 
     override fun setInitialState(): HomeState = HomeState()

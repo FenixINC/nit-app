@@ -8,6 +8,7 @@ val gray3 = Color(color = 0xFF79767D)
 
 val background = Color(color = 0xFF1E2121)
 val background50Opacity = Color(color = 0x801E2121)
+val bottomNavBackground = Color(color = 0xFF1E1E1E)
 
 val yellow = Color(color = 0xFFF2FE8D)
 val yellowLight = Color(color = 0xFFFCFFDF)

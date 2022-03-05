@@ -21,6 +21,7 @@ sealed class MainEvent : ViewEvent {
 
 sealed class MainEffect : ViewEffect {
     data class TopBar(val topBarProvider: TopBarProvider) : MainEffect()
+    data class BottomBar(val isShowBottomBar: Boolean) : MainEffect()
     data class Error(val throwable: Throwable) : MainEffect()
     data class Navigate(
         val destination: String,

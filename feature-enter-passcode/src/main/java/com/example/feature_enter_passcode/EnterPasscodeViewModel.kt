@@ -29,6 +29,7 @@ class EnterPasscodeViewModel @Inject constructor(
                 )
             )
         )
+        navigator.bottomBar(isShowBottomBar = false)
     }
 
     override fun setInitialState(): EnterPasscodeState = EnterPasscodeState.Idle

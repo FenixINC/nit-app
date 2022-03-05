@@ -15,6 +15,10 @@ class SplashViewModel @Inject constructor(
     private val navigator: Navigator
 ) : BaseViewModel<SplashEvent, SplashState, SplashEffect>(), Navigator by navigator {
 
+    init {
+        navigator.bottomBar(isShowBottomBar = false)
+    }
+
     override fun setInitialState() = SplashState.Idle
 
     override fun handleEvents(event: SplashEvent) {

@@ -4,15 +4,15 @@ import com.example.common_viewmodel.ViewEffect
 import com.example.common_viewmodel.ViewEvent
 import com.example.common_viewmodel.ViewState
 
-object ToolbarState : ViewState
+object TopBarState : ViewState
 
-sealed class ToolbarEvent : ViewEvent {
-    object OpenProfile : ToolbarEvent()
-    object OpenMenu : ToolbarEvent()
-    object OpenMore : ToolbarEvent()
-    object NavigateUp : ToolbarEvent()
+sealed class TopBarEvent : ViewEvent {
+    object OpenProfile : TopBarEvent()
+    object OpenMenu : TopBarEvent()
+    object OpenMore : TopBarEvent()
+    object NavigateUp : TopBarEvent()
 }
 
-sealed class ToolbarEffect : ViewEffect {
+sealed class TopBarEffect : ViewEffect {
 
 }

@@ -8,22 +8,22 @@ import javax.inject.Inject
 @HiltViewModel
 class NitTopBarViewModel @Inject constructor(
     private val navigator: Navigator
-) : BaseViewModel<ToolbarEvent, ToolbarState, ToolbarEffect>(), Navigator by navigator {
+) : BaseViewModel<TopBarEvent, TopBarState, TopBarEffect>(), Navigator by navigator {
 
-    override fun setInitialState() = ToolbarState
+    override fun setInitialState() = TopBarState
 
-    override fun handleEvents(event: ToolbarEvent) {
+    override fun handleEvents(event: TopBarEvent) {
         when (event) {
-            is ToolbarEvent.OpenProfile -> {
+            is TopBarEvent.OpenProfile -> {
                 openProfile()
             }
-            is ToolbarEvent.OpenMenu -> {
+            is TopBarEvent.OpenMenu -> {
                 openMenu()
             }
-            is ToolbarEvent.OpenMore -> {
+            is TopBarEvent.OpenMore -> {
 
             }
-            is ToolbarEvent.NavigateUp -> {
+            is TopBarEvent.NavigateUp -> {
                 onBack()
             }
         }

@@ -34,7 +34,7 @@ fun NitTopBar(
 
         AnimatedVisibility(visible = iconBackState.value) {
             IconButton(
-                onClick = { nitTopBarViewModel.setEvent(event = ToolbarEvent.NavigateUp) },
+                onClick = { nitTopBarViewModel.setEvent(event = TopBarEvent.NavigateUp) },
                 modifier = Modifier.constrainAs(iconBack) {
                     start.linkTo(anchor = parent.start)
                     top.linkTo(anchor = parent.top)
@@ -63,7 +63,7 @@ fun NitTopBar(
         if (iconMoreState.value) {
             IconButton(
                 onClick = {
-                    nitTopBarViewModel.setEvent(event = ToolbarEvent.OpenMore)
+                    nitTopBarViewModel.setEvent(event = TopBarEvent.OpenMore)
                 },
                 modifier = Modifier.constrainAs(iconMore) {
                     top.linkTo(anchor = parent.top)

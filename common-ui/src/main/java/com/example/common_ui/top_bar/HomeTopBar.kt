@@ -29,7 +29,7 @@ fun HomeTopBar(
         val (iconProfile, iconLogo) = createRefs()
 
         IconButton(
-            onClick = { nitTopBarViewModel.setEvent(event = ToolbarEvent.OpenProfile) },
+            onClick = { nitTopBarViewModel.setEvent(event = TopBarEvent.OpenProfile) },
             modifier = Modifier.constrainAs(iconProfile) {
                 start.linkTo(anchor = parent.start)
                 top.linkTo(anchor = parent.top)

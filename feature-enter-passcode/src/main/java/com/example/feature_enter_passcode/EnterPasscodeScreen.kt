@@ -47,7 +47,7 @@ fun EnterPasscodeScreen(enterPasscodeViewModel: EnterPasscodeViewModel = hiltVie
         Spacer(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(height = 68.dp)
+                .height(height = 112.dp)
         )
 
         Text(
@@ -120,143 +120,138 @@ private fun PinLockScreen(
             .wrapContentHeight(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally
+        Row {
+            (0 until pinSize).forEach {
+                Image(
+                    imageVector = Icons.Default.Circle,
+                    colorFilter = if (inputPinState.size > it) {
+                        ColorFilter.tint(color = yellow)
+                    } else {
+                        ColorFilter.tint(color = grayCircleBackground)
+                    },
+                    contentDescription = it.toString(),
+                    modifier = Modifier
+                        .padding(all = 8.dp)
+                        .size(size = 10.dp)
+                )
+            }
+        }
+
+        Text(
+            text = errorState.value,
+            color = Color.Red,
+            modifier = Modifier
+                .wrapContentSize()
+                .padding(16.dp)
+        )
+
+        Spacer(modifier = Modifier.height(70.dp))
+
+        ConstraintLayout(
+            modifier = Modifier
+                .wrapContentSize()
+                .padding(bottom = 20.dp)
         ) {
-            Row {
-                (0 until pinSize).forEach {
-                    Image(
-                        imageVector = Icons.Default.Circle,
-                        colorFilter = if (inputPinState.size > it) {
-                            ColorFilter.tint(color = yellow)
-                        } else {
-                            ColorFilter.tint(color = grayCircleBackground)
-                        },
-                        contentDescription = it.toString(),
-                        modifier = Modifier
-                            .padding(all = 8.dp)
-                            .size(size = 10.dp)
+            val (firstLine, secondLine, thirdLine, fourthLine) = createRefs()
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .constrainAs(ref = firstLine) {
+                        start.linkTo(anchor = parent.start)
+                        top.linkTo(anchor = parent.top)
+                        end.linkTo(anchor = parent.end)
+                    },
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                (1..3).forEach { number ->
+                    PinKeyItem(
+                        onClick = { inputPinState.add(number) },
+                        pinItem = PinItem(
+                            type = PinType.NUMBER,
+                            number = number.toString()
+                        )
                     )
                 }
             }
 
-            Text(
-                text = errorState.value,
-                color = Color.Red,
+            Row(
                 modifier = Modifier
-                    .wrapContentSize()
-                    .padding(16.dp)
-            )
-
-            Spacer(modifier = Modifier.height(70.dp))
-
-            ConstraintLayout(
-                modifier = Modifier
-                    .wrapContentSize()
-                    .padding(bottom = 20.dp)
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .constrainAs(ref = secondLine) {
+                        start.linkTo(anchor = parent.start)
+                        top.linkTo(anchor = firstLine.bottom)
+                        end.linkTo(anchor = parent.end)
+                    },
+                horizontalArrangement = Arrangement.SpaceEvenly
             ) {
-                val (firstLine, secondLine, thirdLine, fourthLine) = createRefs()
-
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .wrapContentHeight()
-                        .constrainAs(ref = firstLine) {
-                            start.linkTo(anchor = parent.start)
-                            top.linkTo(anchor = parent.top)
-                            end.linkTo(anchor = parent.end)
-                        },
-                    horizontalArrangement = Arrangement.SpaceEvenly
-                ) {
-                    (1..3).forEach { number ->
-                        PinKeyItem(
-                            onClick = { inputPinState.add(number) },
-                            pinItem = PinItem(
-                                type = PinType.NUMBER,
-                                number = number.toString()
-                            )
-                        )
-                    }
-                }
-
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .wrapContentHeight()
-                        .constrainAs(ref = secondLine) {
-                            start.linkTo(anchor = parent.start)
-                            top.linkTo(anchor = firstLine.bottom)
-                            end.linkTo(anchor = parent.end)
-                        },
-                    horizontalArrangement = Arrangement.SpaceEvenly
-                ) {
-                    (4..6).forEach { number ->
-                        PinKeyItem(
-                            onClick = { inputPinState.add(number) },
-                            pinItem = PinItem(
-                                type = PinType.NUMBER,
-                                number = number.toString()
-                            )
-                        )
-                    }
-                }
-
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .wrapContentHeight()
-                        .constrainAs(ref = thirdLine) {
-                            start.linkTo(anchor = parent.start)
-                            top.linkTo(anchor = secondLine.bottom)
-                            end.linkTo(anchor = parent.end)
-                        },
-                    horizontalArrangement = Arrangement.SpaceEvenly
-                ) {
-                    (7..9).forEach { number ->
-                        PinKeyItem(
-                            onClick = { inputPinState.add(number) },
-                            pinItem = PinItem(
-                                type = PinType.NUMBER,
-                                number = number.toString()
-                            )
-                        )
-                    }
-                }
-
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .wrapContentHeight()
-                        .constrainAs(ref = fourthLine) {
-                            top.linkTo(anchor = thirdLine.bottom)
-                            end.linkTo(anchor = parent.end)
-                        },
-                    horizontalArrangement = Arrangement.SpaceEvenly
-                ) {
-                    PinKeyItem(pinItem = PinItem(type = PinType.EMPTY))
-
+                (4..6).forEach { number ->
                     PinKeyItem(
-                        onClick = { inputPinState.add(0) },
+                        onClick = { inputPinState.add(number) },
                         pinItem = PinItem(
                             type = PinType.NUMBER,
-                            number = 0.toString()
-                        )
-                    )
-
-                    PinKeyItem(
-                        onClick = {
-                            if (inputPinState.isNotEmpty()) {
-                                inputPinState.removeLast()
-                            }
-                        },
-                        pinItem = PinItem(
-                            type = PinType.ICON,
-                            iconDrawable = R.drawable.ic_passcode_back,
-                            iconContentDescription = "Button clear"
+                            number = number.toString()
                         )
                     )
                 }
+            }
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .constrainAs(ref = thirdLine) {
+                        start.linkTo(anchor = parent.start)
+                        top.linkTo(anchor = secondLine.bottom)
+                        end.linkTo(anchor = parent.end)
+                    },
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                (7..9).forEach { number ->
+                    PinKeyItem(
+                        onClick = { inputPinState.add(number) },
+                        pinItem = PinItem(
+                            type = PinType.NUMBER,
+                            number = number.toString()
+                        )
+                    )
+                }
+            }
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .constrainAs(ref = fourthLine) {
+                        top.linkTo(anchor = thirdLine.bottom)
+                        end.linkTo(anchor = parent.end)
+                    },
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                PinKeyItem(pinItem = PinItem(type = PinType.EMPTY))
+
+                PinKeyItem(
+                    onClick = { inputPinState.add(0) },
+                    pinItem = PinItem(
+                        type = PinType.NUMBER,
+                        number = 0.toString()
+                    )
+                )
+
+                PinKeyItem(
+                    onClick = {
+                        if (inputPinState.isNotEmpty()) {
+                            inputPinState.removeLast()
+                        }
+                    },
+                    pinItem = PinItem(
+                        type = PinType.ICON,
+                        iconDrawable = R.drawable.ic_passcode_back,
+                        iconContentDescription = "Button clear"
+                    )
+                )
             }
         }
     }

@@ -41,7 +41,7 @@ fun LoginTopBar(
 
         IconButton(
             onClick = {
-                nitTopBarViewModel.setEvent(event = ToolbarEvent.OpenMore)
+                nitTopBarViewModel.setEvent(event = TopBarEvent.OpenMore)
             },
             modifier = Modifier.constrainAs(iconMore) {
                 top.linkTo(anchor = parent.top)

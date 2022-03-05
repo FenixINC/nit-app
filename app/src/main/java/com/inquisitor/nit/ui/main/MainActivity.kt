@@ -10,6 +10,7 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -19,6 +20,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import com.example.common_resources.background
+import com.example.common_ui.bottom_bar.NitBottomBar
 import com.example.common_ui.top_bar.HomeTopBar
 import com.example.common_ui.top_bar.LoginTopBar
 import com.example.navigation.destination.SplashDestination
@@ -53,83 +55,98 @@ class MainActivity : AppCompatActivity() {
                             val topBarProviderState = remember {
                                 mutableStateOf(value = TopBarProvider())
                             }
+                            val bottomBarState = remember {
+                                mutableStateOf(value = false)
+                            }
 
                             SideEffect {
                                 systemUiControllerState.setStatusBarColor(color = Color.Transparent)
+                                systemUiControllerState.setNavigationBarColor(color = Color.Transparent)
                             }
 
                             ObserveEffect(
                                 navController = navControllerState,
-                                updateTopBarProviderState = { topBarProvider ->
+                                topBarProviderState = { topBarProvider ->
                                     topBarProviderState.value = topBarProvider
+                                },
+                                bottomBarState = { isShowBottomBar ->
+                                    bottomBarState.value = isShowBottomBar
                                 }
                             )
 
 //                            NitappTheme {
-                            Surface(color = background) {
-                                Column(modifier = Modifier.fillMaxSize()) {
-                                    val topBarType = topBarProviderState.value.topBarType
-                                    AnimatedVisibility(
-                                        visible = topBarType != TopBarType.EMPTY
-                                    ) {
-                                        when (topBarType) {
-                                            TopBarType.LOGIN -> {
-                                                LoginTopBar(
-                                                    topBarLoginConfig = topBarProviderState
-                                                        .value
-                                                        .topBarLoginConfig
-                                                )
-                                            }
-                                            TopBarType.HOME -> {
-                                                HomeTopBar(
-                                                    topBarHomeConfig = topBarProviderState
-                                                        .value
-                                                        .topBarHomeConfig
-                                                )
-                                            }
-                                            TopBarType.CARD_DETAILS -> {
+                            Scaffold(
+                                bottomBar = {
+                                    if (bottomBarState.value) {
+                                        NitBottomBar(navController = navControllerState)
+                                    }
+                                }
+                            ) {
+                                Surface(color = background) {
+                                    Column(modifier = Modifier.fillMaxSize()) {
+                                        val topBarType = topBarProviderState.value.topBarType
+                                        AnimatedVisibility(
+                                            visible = topBarType != TopBarType.EMPTY
+                                        ) {
+                                            when (topBarType) {
+                                                TopBarType.LOGIN -> {
+                                                    LoginTopBar(
+                                                        topBarLoginConfig = topBarProviderState
+                                                            .value
+                                                            .topBarLoginConfig
+                                                    )
+                                                }
+                                                TopBarType.HOME -> {
+                                                    HomeTopBar(
+                                                        topBarHomeConfig = topBarProviderState
+                                                            .value
+                                                            .topBarHomeConfig
+                                                    )
+                                                }
+                                                TopBarType.CARD_DETAILS -> {
 
+                                                }
                                             }
                                         }
+
+                                        AnimatedNavHost(
+                                            navController = navControllerState,
+                                            startDestination = SplashDestination.route(),
+                                            builder = {
+                                                addComposableDestinations()
+                                            },
+                                            enterTransition = {
+                                                slideIntoContainer(
+                                                    AnimatedContentScope.SlideDirection.Left,
+                                                    animationSpec = tween(200)
+                                                )
+                                            },
+                                            exitTransition = {
+                                                slideOutOfContainer(
+                                                    AnimatedContentScope.SlideDirection.Left,
+                                                    animationSpec = tween(200)
+                                                )
+                                            },
+                                            popEnterTransition = {
+                                                slideIntoContainer(
+                                                    AnimatedContentScope.SlideDirection.Right,
+                                                    animationSpec = tween(200)
+                                                )
+                                            },
+                                            popExitTransition = {
+                                                slideOutOfContainer(
+                                                    AnimatedContentScope.SlideDirection.Right,
+                                                    animationSpec = tween(200)
+                                                )
+                                            }
+                                        )
                                     }
 
-                                    AnimatedNavHost(
-                                        navController = navControllerState,
-                                        startDestination = SplashDestination.route(),
-                                        builder = {
-                                            addComposableDestinations()
-                                        },
-                                        enterTransition = {
-                                            slideIntoContainer(
-                                                AnimatedContentScope.SlideDirection.Left,
-                                                animationSpec = tween(200)
-                                            )
-                                        },
-                                        exitTransition = {
-                                            slideOutOfContainer(
-                                                AnimatedContentScope.SlideDirection.Left,
-                                                animationSpec = tween(200)
-                                            )
-                                        },
-                                        popEnterTransition = {
-                                            slideIntoContainer(
-                                                AnimatedContentScope.SlideDirection.Right,
-                                                animationSpec = tween(200)
-                                            )
-                                        },
-                                        popExitTransition = {
-                                            slideOutOfContainer(
-                                                AnimatedContentScope.SlideDirection.Right,
-                                                animationSpec = tween(200)
-                                            )
-                                        }
-                                    )
+                                    /**
+                                     * Base logic
+                                     **/
+                                    CheckInternetConnection()
                                 }
-
-                                /**
-                                 * Base logic
-                                 **/
-                                CheckInternetConnection()
                             }
 //                            }
                         }
@@ -153,7 +170,8 @@ class MainActivity : AppCompatActivity() {
     @Composable
     private fun ObserveEffect(
         navController: NavController,
-        updateTopBarProviderState: (TopBarProvider) -> Unit
+        topBarProviderState: (TopBarProvider) -> Unit,
+        bottomBarState: (Boolean) -> Unit
     ) {
         LaunchedEffect(navController) {
             mainViewModel.effect.collectLatest { effect ->
@@ -162,7 +180,10 @@ class MainActivity : AppCompatActivity() {
                         this@MainActivity.finish()
                     }
                     is MainEffect.TopBar -> {
-                        updateTopBarProviderState(effect.topBarProvider)
+                        topBarProviderState(effect.topBarProvider)
+                    }
+                    is MainEffect.BottomBar -> {
+                        bottomBarState(effect.isShowBottomBar)
                     }
                     is MainEffect.NavigateUp -> {
                         navController.navigateUp()

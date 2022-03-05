@@ -27,6 +27,11 @@ class NavigatorImpl @Inject constructor() : Navigator {
         )
     ).isSuccess
 
+    override fun bottomBar(isShowBottomBar: Boolean): Boolean =
+        navigationEvents.trySend(
+            element = NavigatorEvent.BottomBar(isShowBottomBar = isShowBottomBar)
+        ).isSuccess
+
     override fun navigateUp(): Boolean =
         navigationEvents.trySend(element = NavigatorEvent.NavigateUp).isSuccess
 

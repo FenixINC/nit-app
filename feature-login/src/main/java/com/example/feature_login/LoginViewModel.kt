@@ -24,6 +24,7 @@ class LoginViewModel @Inject constructor(
                 )
             )
         )
+        navigator.bottomBar(isShowBottomBar = false)
     }
 
     override fun setInitialState(): LoginState = LoginState.Idle

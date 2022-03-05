@@ -53,6 +53,11 @@ class MainViewModel @Inject constructor(
                             MainEffect.TopBar(topBarProvider = navigationEvent.topBarProvider)
                         }
                     }
+                    is NavigatorEvent.BottomBar -> {
+                        setEffect {
+                            MainEffect.BottomBar(isShowBottomBar = navigationEvent.isShowBottomBar)
+                        }
+                    }
                     is NavigatorEvent.Error -> {
                         // TODO: show error
                     }
