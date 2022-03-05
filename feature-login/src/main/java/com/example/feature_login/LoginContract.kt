@@ -6,6 +6,7 @@ import com.example.common_viewmodel.ViewState
 
 sealed class LoginEvent : ViewEvent {
     object CloseApp : LoginEvent()
+    object OpenEnterPasscodeScreen : LoginEvent()
 }
 
 sealed class LoginState : ViewState {

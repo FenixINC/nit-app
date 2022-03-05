@@ -4,10 +4,12 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
+import com.example.feature_enter_passcode.EnterPasscodeScreen
 import com.example.feature_home.HomeScreen
 import com.example.feature_login.LoginScreen
 import com.example.feature_splash.SplashScreen
 import com.example.navigation.NavigationDestination
+import com.example.navigation.destination.EnterPasscodeDestination
 import com.example.navigation.destination.HomeDestination
 import com.example.navigation.destination.LoginDestination
 import com.example.navigation.destination.SplashDestination
@@ -17,6 +19,7 @@ private fun getComposableDestinations(): Map<NavigationDestination, @Composable 
     mapOf(
         SplashDestination to { SplashScreen() },
         LoginDestination to { LoginScreen() },
+        EnterPasscodeDestination to { EnterPasscodeScreen() },
         HomeDestination to { HomeScreen() },
 //        CollectionDetailsDestination to { navBackStackEntry ->
 //            val collectionId = navBackStackEntry

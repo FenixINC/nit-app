@@ -1,29 +1,30 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     kotlin("android")
     id("kotlin-parcelize")
     kotlin("kapt")
-    id("dagger.hilt.android.plugin")
 }
 
 android {
-    compileSdk = 31
+    compileSdk = 32
+
     defaultConfig {
-        applicationId = "com.inquisitor.nit"
-        minSdk = 28
-        targetSdk = 31
-        versionCode = 1
-        versionName = "1.0.1"
-    }
-    buildTypes {
-        getByName("release") {
-            isMinifyEnabled = false
-        }
-        getByName("debug") {
-            isMinifyEnabled = false
-        }
+        minSdk = 16
+        targetSdk = 32
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+//        consumerProguardFiles("consumer-rules.pro")
     }
 
+    buildTypes {
+        release {
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -47,23 +48,16 @@ android {
 }
 
 dependencies {
+    implementation(project(":common-viewmodel"))
     implementation(project(":common-resources"))
-    implementation(project(":domain"))
-    implementation(project(":data"))
     implementation(project(":navigation"))
-    implementation(project(":feature-splash"))
-    implementation(project(":feature-login"))
-    implementation(project(":feature-enter-passcode"))
-    implementation(project(":feature-home"))
-    implementation(project(":feature-profile"))
 
     // AndroidX
     implementation(dependencyNotation = "androidx.core:core-ktx:1.7.0")
     implementation(dependencyNotation = "androidx.appcompat:appcompat:1.4.1")
     implementation(dependencyNotation = "androidx.lifecycle:lifecycle-runtime-ktx:2.4.1")
-    // Navigation
-    implementation(dependencyNotation = "androidx.navigation:navigation-fragment-ktx:2.4.1")
-    implementation(dependencyNotation = "androidx.navigation:navigation-ui-ktx:2.4.1")
+    implementation(dependencyNotation = "androidx.fragment:fragment-ktx:1.4.1")
+    implementation(dependencyNotation = "androidx.constraintlayout:constraintlayout-compose:1.0.0")
 
     // Material
     implementation(dependencyNotation = "com.google.android.material:material:1.5.0")
@@ -73,7 +67,6 @@ dependencies {
     implementation(dependencyNotation = "androidx.compose.runtime:runtime:1.2.0-alpha04")
     implementation(dependencyNotation = "androidx.compose.ui:ui:1.2.0-alpha04")
     implementation(dependencyNotation = "androidx.compose.ui:ui-tooling-preview:1.2.0-alpha04")
-    implementation(dependencyNotation = "androidx.constraintlayout:constraintlayout-compose:1.0.0")
     // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
     implementation(dependencyNotation = "androidx.compose.foundation:foundation:1.2.0-alpha04")
     // Material Design, Icons
@@ -88,25 +81,17 @@ dependencies {
     implementation(dependencyNotation = "androidx.compose.animation:animation:1.2.0-alpha04")
     // Navigation Hilt
     implementation(dependencyNotation = "androidx.hilt:hilt-navigation-compose:1.0.0")
-    // Navigation Compose
-    implementation(dependencyNotation = "androidx.navigation:navigation-compose:2.5.0-alpha03")
-    // Accompanist Shimmer
-    implementation(dependencyNotation = "com.google.accompanist:accompanist-placeholder-material:0.24.3-alpha")
-    // Accompanist system ui controller
-    implementation(dependencyNotation = "com.google.accompanist:accompanist-systemuicontroller:0.24.3-alpha")
-    // Accompanist Navigation Compose Animations
-    implementation(dependencyNotation = "com.google.accompanist:accompanist-navigation-animation:0.24.3-alpha")
 
     // Coil
     implementation(dependencyNotation = "io.coil-kt:coil-compose:1.4.0")
 
-    // Dagger
-    implementation(dependencyNotation = "com.google.dagger:dagger:2.40.5")
-    kapt(dependencyNotation = "com.google.dagger:dagger-compiler:2.40.5")
-
     // Hilt
     implementation(dependencyNotation = "com.google.dagger:hilt-android:2.40.5")
     kapt(dependencyNotation = "com.google.dagger:hilt-android-compiler:2.40.5")
+
+    // Koin
+    implementation(dependencyNotation = "io.insert-koin:koin-android:3.2.0-beta-1")
+    implementation(dependencyNotation = "io.insert-koin:koin-androidx-compose:3.2.0-beta-1")
 
     // Test
     testImplementation(dependencyNotation = "junit:junit:4.13.2")

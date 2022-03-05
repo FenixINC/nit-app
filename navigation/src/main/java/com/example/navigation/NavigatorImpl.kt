@@ -18,13 +18,19 @@ class NavigatorImpl @Inject constructor() : Navigator {
     override fun onError(throwable: Throwable): Boolean =
         navigationEvents.trySend(element = NavigatorEvent.Error(throwable = throwable)).isSuccess
 
-    override fun topBar(isShowTopBar: Boolean, isSHowBackButton: Boolean) =
-        navigationEvents.trySend(
-            element = NavigatorEvent.TopBar(
-                isShowTopBar = isShowTopBar,
-                isShowBackButton = isSHowBackButton
-            )
-        ).isSuccess
+    override fun topBar(
+        isShowTopBar: Boolean,
+        isShowBackButton: Boolean,
+        isShowIconProfile: Boolean,
+        isShowIconMore: Boolean
+    ) = navigationEvents.trySend(
+        element = NavigatorEvent.TopBar(
+            isShowTopBar = isShowTopBar,
+            isShowBackButton = isShowBackButton,
+            isShowIconProfile = isShowIconProfile,
+            isShowIconMore = isShowIconMore
+        )
+    ).isSuccess
 
     override fun navigateUp(): Boolean =
         navigationEvents.trySend(element = NavigatorEvent.NavigateUp).isSuccess

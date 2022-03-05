@@ -20,7 +20,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.example.common_resources.background
 import com.example.common_resources.background50Opacity
 import com.example.navigation.destination.SplashDestination
 import com.google.accompanist.navigation.animation.AnimatedNavHost
@@ -55,6 +54,7 @@ class MainActivity : AppCompatActivity() {
                             }
 
                             val isShowToolbarState = remember { mutableStateOf(value = false) }
+                            val iconMoreState = remember { mutableStateOf(value = false) }
 
 //                            NitappTheme {
                             Surface(color = background50Opacity) {
@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
 
                                 Column(modifier = Modifier.fillMaxSize()) {
                                     AnimatedVisibility(visible = isShowToolbarState.value) {
-                                        NitTopBar()
+                                        NitTopBar(iconMoreState = iconMoreState)
                                     }
 
                                     LaunchedEffect(navController) {
@@ -72,8 +72,8 @@ class MainActivity : AppCompatActivity() {
                                                     this@MainActivity.finish()
                                                 }
                                                 is MainEffect.TopBar -> {
-                                                    isShowToolbarState.value =
-                                                        effect.isShowToolbar
+                                                    isShowToolbarState.value = effect.isShowToolbar
+                                                    iconMoreState.value = effect.isShowIconMore
                                                 }
                                                 is MainEffect.NavigateUp -> {
                                                     navController.navigateUp()

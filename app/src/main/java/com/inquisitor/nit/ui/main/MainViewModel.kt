@@ -50,7 +50,10 @@ class MainViewModel @Inject constructor(
                     is NavigatorEvent.NavigateUp -> setEffect { MainEffect.NavigateUp }
                     is NavigatorEvent.TopBar -> {
                         setEffect {
-                            MainEffect.TopBar(isShowToolbar = navigationEvent.isShowTopBar)
+                            MainEffect.TopBar(
+                                isShowToolbar = navigationEvent.isShowTopBar,
+                                isShowIconMore = navigationEvent.isShowIconMore
+                            )
                         }
                     }
                     is NavigatorEvent.Error -> {

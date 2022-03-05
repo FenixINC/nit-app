@@ -9,7 +9,9 @@ sealed class NavigatorEvent {
 
     data class TopBar(
         val isShowTopBar: Boolean = false,
-        val isShowBackButton: Boolean = false
+        val isShowBackButton: Boolean = false,
+        val isShowIconProfile: Boolean = false,
+        val isShowIconMore: Boolean = false
     ) : NavigatorEvent()
 
     data class Error(

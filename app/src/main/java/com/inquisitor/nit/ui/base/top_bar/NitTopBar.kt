@@ -22,7 +22,8 @@ import com.inquisitor.nit.ui.resources.toolbarHeight
 @Composable
 fun NitTopBar(
     nitTopBarViewModel: NitTopBarViewModel = hiltViewModel(),
-    iconBackState: MutableState<Boolean> = mutableStateOf(value = false)
+    iconBackState: MutableState<Boolean> = mutableStateOf(value = false),
+    iconMoreState: MutableState<Boolean> = mutableStateOf(value = false)
 ) {
     ConstraintLayout(
         modifier = Modifier
@@ -59,20 +60,22 @@ fun NitTopBar(
                 }
         )
 
-        IconButton(
-            onClick = {
-                nitTopBarViewModel.setEvent(event = ToolbarEvent.OpenMore)
-            },
-            modifier = Modifier.constrainAs(iconMore) {
-                top.linkTo(anchor = parent.top)
-                end.linkTo(anchor = parent.end)
-                bottom.linkTo(anchor = parent.bottom)
+        if (iconMoreState.value) {
+            IconButton(
+                onClick = {
+                    nitTopBarViewModel.setEvent(event = ToolbarEvent.OpenMore)
+                },
+                modifier = Modifier.constrainAs(iconMore) {
+                    top.linkTo(anchor = parent.top)
+                    end.linkTo(anchor = parent.end)
+                    bottom.linkTo(anchor = parent.bottom)
+                }
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.ic_more),
+                    contentDescription = "Icon more"
+                )
             }
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.ic_more),
-                contentDescription = "Icon more"
-            )
         }
     }
 

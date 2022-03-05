@@ -45,7 +45,7 @@ fun LoginScreen(loginViewModel: LoginViewModel = hiltViewModel()) {
         Button(
             colors = ButtonDefaults.buttonColors(backgroundColor = Color.Transparent),
             contentPadding = PaddingValues(),
-            onClick = { },
+            onClick = { loginViewModel.setEvent(event = LoginEvent.OpenEnterPasscodeScreen) },
             shape = RoundedCornerShape(36.dp)
         ) {
             Box(
@@ -82,7 +82,7 @@ fun LoginScreen(loginViewModel: LoginViewModel = hiltViewModel()) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(height = 48.dp)
-                    .background(shape = RoundedCornerShape(36.dp), color = grayButton),
+                    .background(shape = RoundedCornerShape(36.dp), color = grayButtonBackground),
                 contentAlignment = Alignment.Center,
             ) {
                 Text(

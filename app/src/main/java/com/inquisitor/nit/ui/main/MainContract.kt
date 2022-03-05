@@ -19,7 +19,11 @@ sealed class MainEvent : ViewEvent {
 }
 
 sealed class MainEffect : ViewEffect {
-    data class TopBar(val isShowToolbar: Boolean) : MainEffect()
+    data class TopBar(
+        val isShowToolbar: Boolean,
+        val isShowIconMore: Boolean
+    ) : MainEffect()
+
     data class Error(val throwable: Throwable) : MainEffect()
     data class Navigate(
         val destination: String,

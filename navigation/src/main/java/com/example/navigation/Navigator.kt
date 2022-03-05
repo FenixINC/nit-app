@@ -12,7 +12,9 @@ interface Navigator {
 
     fun topBar(
         isShowTopBar: Boolean = false,
-        isSHowBackButton: Boolean = false
+        isShowBackButton: Boolean = false,
+        isShowIconProfile: Boolean = false,
+        isShowIconMore: Boolean = false
     ): Boolean
 
     fun navigateUp(): Boolean
