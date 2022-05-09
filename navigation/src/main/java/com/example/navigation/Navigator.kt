@@ -13,7 +13,7 @@ interface Navigator {
 
     fun topBar(topBarProvider: TopBarProvider = TopBarProvider()): Boolean
 
-    fun bottomBar(isShowBottomBar: Boolean = true): Boolean
+    fun bottomBar(isShowBottomBar: Boolean): Boolean
 
     fun navigateUp(): Boolean
 

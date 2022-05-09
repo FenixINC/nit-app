@@ -1,10 +1,7 @@
 package com.example.common_ui.top_bar
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -30,15 +27,18 @@ fun HomeTopBar(
 
         IconButton(
             onClick = { nitTopBarViewModel.setEvent(event = TopBarEvent.OpenProfile) },
-            modifier = Modifier.constrainAs(iconProfile) {
-                start.linkTo(anchor = parent.start)
-                top.linkTo(anchor = parent.top)
-                bottom.linkTo(anchor = parent.bottom)
-            }
+            modifier = Modifier
+                .size(size = 32.dp)
+                .constrainAs(iconProfile) {
+                    start.linkTo(anchor = parent.start)
+                    top.linkTo(anchor = parent.top)
+                    bottom.linkTo(anchor = parent.bottom)
+                }
         ) {
             Image(
                 painter = painterResource(id = topBarHomeConfig.iconProfile),
-                contentDescription = "Profile image"
+                contentDescription = "Profile image",
+                modifier = Modifier.fillMaxSize()
             )
         }
 

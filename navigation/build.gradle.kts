@@ -27,11 +27,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
 }
 
@@ -67,10 +67,6 @@ dependencies {
     implementation(dependencyNotation = "androidx.hilt:hilt-navigation-compose:1.0.0")
     // Navigation Compose
     implementation(dependencyNotation = "androidx.navigation:navigation-compose:2.5.0-alpha03")
-    // Accompanist Shimmer
-    implementation(dependencyNotation = "com.google.accompanist:accompanist-placeholder-material:0.24.1-alpha")
-    // Navigation Compose Animations
-    implementation(dependencyNotation = "com.google.accompanist:accompanist-navigation-animation:0.24.2-alpha")
 
     // Coil
     implementation(dependencyNotation = "io.coil-kt:coil-compose:1.4.0")
