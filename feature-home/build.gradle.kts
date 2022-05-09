@@ -50,6 +50,7 @@ android {
 dependencies {
     implementation(project(":common-viewmodel"))
     implementation(project(":common-resources"))
+    implementation(project(":common-ui"))
     implementation(project(":navigation"))
     implementation(project(":domain"))
 
@@ -60,7 +61,7 @@ dependencies {
     implementation(dependencyNotation = "androidx.fragment:fragment-ktx:1.4.1")
 
     // Material
-    implementation(dependencyNotation = "com.google.android.material:material:1.5.0")
+    implementation(dependencyNotation = "com.google.android.material:material:1.6.0")
 
     // Compose
     implementation(dependencyNotation = "androidx.compose.compiler:compiler:1.2.0-alpha04")
@@ -81,6 +82,8 @@ dependencies {
     implementation(dependencyNotation = "androidx.compose.animation:animation:1.2.0-alpha04")
     // Navigation Hilt
     implementation(dependencyNotation = "androidx.hilt:hilt-navigation-compose:1.0.0")
+    // Accompanist Shimmer
+    implementation(dependencyNotation = "com.google.accompanist:accompanist-placeholder-material:0.24.3-alpha")
 
     // Coil
     implementation(dependencyNotation = "io.coil-kt:coil-compose:1.4.0")

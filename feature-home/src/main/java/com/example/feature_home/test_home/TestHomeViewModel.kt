@@ -3,6 +3,7 @@ package com.example.feature_home.test_home
 import androidx.lifecycle.viewModelScope
 import com.example.common_viewmodel.BaseViewModel
 import com.example.navigation.Navigator
+import com.inquisitor.domain.di.IoDispatcher
 import com.inquisitor.domain.model.CollectionModel
 import com.inquisitor.domain.model.PhotoModel
 import com.inquisitor.domain.model.VideoModel
@@ -10,9 +11,7 @@ import com.inquisitor.domain.usecase.CollectionUseCase
 import com.inquisitor.domain.usecase.PhotoUseCase
 import com.inquisitor.domain.usecase.VideoUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import javax.inject.Inject
 
 @HiltViewModel
