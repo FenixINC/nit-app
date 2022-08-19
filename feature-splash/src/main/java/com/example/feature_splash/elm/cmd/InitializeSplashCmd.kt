@@ -2,7 +2,6 @@ package com.example.feature_splash.elm.cmd
 
 import com.example.feature_splash.elm.base.FlowCmdHandler
 import com.example.feature_splash.elm.base.Msg
-import com.example.feature_splash.elm.base.SplashCmd
 import com.example.feature_splash.elm.base.name
 import com.example.feature_splash.elm.msg.OpenHomeScreenMsg
 import com.example.feature_splash.elm.splash.SplashElmState

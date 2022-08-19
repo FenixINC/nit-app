@@ -1,7 +1,7 @@
 package com.example.feature_splash.elm.splash
 
 import androidx.lifecycle.viewModelScope
-import com.example.feature_splash.elm.base.SplashCmd
+import com.example.feature_splash.elm.cmd.SplashCmd
 import com.example.feature_splash.elm.base.TeaViewModel
 import com.example.feature_splash.elm.base.state
 import com.example.navigation.NavigationConstants.ROUTE_HOME

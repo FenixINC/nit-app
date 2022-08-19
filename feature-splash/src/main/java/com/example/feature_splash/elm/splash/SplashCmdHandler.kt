@@ -2,7 +2,7 @@ package com.example.feature_splash.elm.splash
 
 import com.example.feature_splash.elm.base.FlowCmdHandler
 import com.example.feature_splash.elm.base.Msg
-import com.example.feature_splash.elm.base.SplashCmd
+import com.example.feature_splash.elm.cmd.SplashCmd
 import com.example.feature_splash.elm.cmd.InitializeSplashCmd
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

@@ -2,7 +2,7 @@ package com.inquisitor.nit.di.module
 
 import com.example.feature_splash.elm.base.FlowCmdHandler
 import com.example.feature_splash.elm.cmd.InitializeSplashCmd
-import com.example.feature_splash.elm.base.SplashCmd
+import com.example.feature_splash.elm.cmd.SplashCmd
 import com.example.feature_splash.elm.splash.SplashElmState
 import dagger.Module
 import dagger.Provides
